@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 바이브코딩 실무 과정 - Presentation</title>
+
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+
+    <!-- JetBrains Mono -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Prism.js for code blocks -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0c0c0c;
+            --text-color: #e0e0e0;
+            --accent-green: #39ff14;
+            --accent-cyan: #00f3ff;
+            --accent-magenta: #ff00ff;
+            --border-color: #333;
+            --terminal-green: rgba(57, 255, 20, 0.2);
+            --font-main: 'Pretendard', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-speed: 0.5s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Terminal Scanline Effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 1000;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        /* Presentation Container */
+        #presentation {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 4rem;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            overflow-y: auto;
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 4rem;
+            color: var(--accent-green);
+            text-shadow: 0 0 10px var(--accent-green);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        h2 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            color: var(--accent-cyan);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-cyan);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-family: var(--font-mono);
+            font-size: 1.8rem;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        p,
+        li {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        ul {
+            list-style: none;
+            margin-left: 1.5rem;
+        }
+
+        li::before {
+            content: "> ";
+            color: var(--accent-green);
+            font-family: var(--font-mono);
+            margin-right: 0.5rem;
+        }
+
+        .accent {
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .cyan {
+            color: var(--accent-cyan);
+        }
+
+        /* Layout Utilities */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #333;
+            padding: 1.5rem;
+            border-radius: 4px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            background: rgba(0, 243, 255, 0.05);
+        }
+
+        .card h4 {
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-mono);
+        }
+
+        /* Image Display */
+        .image-container {
+            width: 100%;
+            max-height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8) contrast(1.1);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #111, #222);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            border: 1px dashed #555;
+            margin-top: 1rem;
+        }
+
+        .placeholder-icon {
+            width: 8rem;
+            height: 8rem;
+            stroke: var(--accent-green);
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 15px var(--accent-green)) drop-shadow(0 0 30px rgba(57, 255, 20, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .active .placeholder-icon {
+            animation: iconFocus 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes iconFocus {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .card-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            stroke: var(--accent-cyan);
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 5px var(--accent-cyan));
+        }
+
+        /* UI Controls */
+        .controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 1001;
+        }
+
+        button {
+            background: transparent;
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            padding: 0.5rem 1rem;
+            font-family: var(--font-mono);
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(57, 255, 20, 0.1);
+        }
+
+        button:hover {
+            background: var(--accent-green);
+            color: black;
+            box-shadow: 0 0 15px var(--accent-green);
+        }
+
+        .counter {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            color: var(--accent-green);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-cyan);
+            width: 0%;
+            transition: width 0.3s;
+            box-shadow: 0 0 10px var(--accent-cyan);
+            z-index: 1002;
+        }
+
+        /* Speaker Notes Panel */
+        #notes-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background: #050505;
+            border-left: 1px solid var(--accent-green);
+            padding: 2rem;
+            z-index: 1100;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            font-size: 1rem;
+        }
+
+        #notes-panel.open {
+            right: 0;
+        }
+
+        #notes-panel h3 {
+            color: var(--accent-green);
+            border-bottom: 1px solid var(--accent-green);
+            padding-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        #notes-content {
+            margin-top: 1rem;
+            color: #aaa;
+            line-height: 1.4;
+        }
+
+        /* Fullscreen */
+        :fullscreen #presentation {
+            background: var(--bg-color);
+        }
+
+        /* Transitions */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .active .stagger-item {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Print Style */
+        @media print {
+
+            .controls,
+            .progress-bar,
+            .counter,
+            #notes-panel {
+                display: none !important;
+            }
+
+            .slide {
+                position: static;
+                display: block;
+                page-break-after: always;
+                height: 100vh;
+            }
+
+            @page {
+                size: landscape;
+                margin: 0;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1a1a1a;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide active"
+            data-notes="안녕하세요. 오늘 발표할 주제는 'AI 바이브코딩 실무 과정' 커리큘럼입니다. 에이전틱 엔지니어링 시대에 우리는 어떻게 설계자로 거듭날 수 있을지 학습 로드맵을 살펴보겠습니다. [PAUSE]">
+            <h1 class="stagger-item" style="animation-delay: 0.1s;">AI VIBE CODING</h1>
+            <p class="stagger-item cyan" style="animation-delay: 0.3s; font-family: var(--font-mono);">$ init
+                --architect-mode</p>
+            <h3 class="stagger-item" style="animation-delay: 0.5s;">에이전틱 엔지니어링 & 설계자 실전 과정</h3>
+            <div class="image-container stagger-item" style="animation-delay: 0.7s;">
+                <img src="vibe_coding_title_1775550607233.png" alt="AI Vibe Coding Title">
+            </div>
+            <p class="stagger-item" style="font-size: 1rem; margin-top: 2rem; animation-delay: 0.9s;">Presenter: AI
+                Architect Group | 2026.04.07</p>
+        </div>
+
+        <!-- Slide 2: Transition -->
+        <div class="slide"
+            data-notes="첫 번째 질문입니다. 우리는 왜 지금 설계자가 되어야 할까요? 단순히 코드를 작성하는 코더의 시대는 저물고 있습니다. 이제 AI를 지휘하는 설계자의 역량이 필수적인 시대입니다. [1 min]">
+            <h2>$ cat /var/log/evolution.sh</h2>
+            <h3>코더에서 설계자로 (Transition)</h3>
+            <ul class="stagger-item" style="animation-delay: 0.2s;">
+                <li>단순 구현 중심에서 <span class="accent">시스템 설계 중심</span>으로</li>
+                <li>코드 작성이 아닌 <span class="accent">AI 에이전트 오케스트레이션</span></li>
+                <li>개발 생산성의 핵심: 기술 스택이 아닌 <span class="accent">토큰 전략</span></li>
+            </ul>
+            <div class="image-container stagger-item" style="animation-delay: 0.5s;">
+                <img src="ai_architect_concept_1775550720156.png" alt="Architect Concept">
+            </div>
+        </div>
+
+        <!-- Slide 3: Philosophy -->
+        <div class="slide"
+            data-notes="이 과정의 핵심 철학은 세 가지 기둥으로 이루어져 있습니다. 바로 에이전틱 엔지니어링, 토큰 이코노미, 그리고 AI 매니징입니다. [2 min]">
+            <h2>CORE PHILOSOPHY</h2>
+            <div class="grid">
+                <div class="card stagger-item" style="animation-delay: 0.2s;">
+                    <i data-lucide="cpu" class="card-icon"></i>
+                    <h4>1. 에이전틱 엔지니어링</h4>
+                    <p>직접 코딩하지 않고 요구사항과 설계서(프롬프트)로 AI를 지휘함.</p>
+                </div>
+                <div class="card stagger-item" style="animation-delay: 0.4s;">
+                    <i data-lucide="coins" class="card-icon" style="stroke: var(--accent-magenta); filter: drop-shadow(0 0 5px var(--accent-magenta));"></i>
+                    <h4>2. 토큰 이코노미</h4>
+                    <p>토큰 사용량이 곧 생산성. 전략적인 소비로 결과물 최적화.</p>
+                </div>
+                <div class="card stagger-item" style="animation-delay: 0.6s;">
+                    <i data-lucide="users" class="card-icon" style="stroke: var(--accent-green); filter: drop-shadow(0 0 5px var(--accent-green));"></i>
+                    <h4>3. AI 매니징</h4>
+                    <p>복수의 AI 에이전트를 동시 운용하는 설계자적 관리 역량.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Roadmap -->
+        <div class="slide" data-notes="총 8주, 16일간의 몰입형 로드맵입니다. 각 단계별로 점진적인 확장을 목표로 합니다. [PAUSE]">
+            <h2>$ status --roadmap</h2>
+            <div class="grid">
+                <div class="card stagger-item" style="animation-delay: 0.2s;">
+                    <i data-lucide="map" class="card-icon"></i>
+                    <p class="accent">Stage 1 (1~2주)</p>
+                    <p>설계자 마인드셋 & 환경 구축</p>
+                </div>
+                <div class="card stagger-item" style="animation-delay: 0.4s;">
+                    <i data-lucide="layout" class="card-icon"></i>
+                    <p class="accent">Stage 2 (3~4주)</p>
+                    <p>설계 원칙 체득 & 풀스택 구축</p>
+                </div>
+                <div class="card stagger-item" style="animation-delay: 0.6s;">
+                    <i data-lucide="layers" class="card-icon"></i>
+                    <p class="accent">Stage 3 (5~6주)</p>
+                    <p>에이전트 매니징 심화 (병렬화)</p>
+                </div>
+                <div class="card stagger-item" style="animation-delay: 0.8s;">
+                    <i data-lucide="ship" class="card-icon"></i>
+                    <p class="accent">Stage 4 (7~8주)</p>
+                    <p>실전 배포 & 포트폴리오 완성</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Tech Stack -->
+        <div class="slide" data-notes="우리가 사용할 강력한 도구들입니다. 안티그래비티와 제미나이 3을 중심으로 수파베이스와 파인콘 등 최신 클라우드 인프라를 연동합니다.">
+            <h2>STACK OVERVIEW</h2>
+            <div class="grid">
+                <div class="card stagger-item" style="animation-delay: 0.1s;">
+                    <h4>AI Engine</h4>
+                    <p>Gemini 3 Pro/Flash, Claude, GPT-4o</p>
+                </div>
+                <div class="card stagger-item" style="animation-delay: 0.2s;">
+                    <h4>Coding Tool</h4>
+                    <p>Antigravity, Stitch (Design)</p>
+                </div>
+                <div class="card stagger-item" style="animation-delay: 0.3s;">
+                    <h4>Backend/DB</h4>
+                    <p>Supabase, Pinecone (Vector DB)</p>
+                </div>
+                <div class="card stagger-item" style="animation-delay: 0.4s;">
+                    <h4>Frameworks</h4>
+                    <p>LangChain, React/Next.js</p>
+                </div>
+                <div class="card stagger-item" style="animation-delay: 0.5s;">
+                    <h4>OPS</h4>
+                    <p>Git/GitHub, Vercel</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Stage 1 -->
+        <div class="slide" data-notes="1단계는 기반을 다지는 시기입니다. 도구를 다루는 법과 함께 '설계서' 작성의 표준인 TCREI를 학습합니다.">
+            <h3>[Stage 1] Mindset & Setup</h3>
+            <h2>$ cd /phase/01_foundations</h2>
+            <ul>
+                <li>Day 01: 제미나이 3와의 첫 대화, 바이브코딩 입문</li>
+                <li>Day 02: 안티그래비티 환경 구축 및 워크플로우 이해</li>
+                <li>Day 03: <span class="accent">TCREI 프레임워크</span>: 정교한 설계서 작성법</li>
+                <li>Day 04: Git 버전 관리와 바이브코딩 핵심 키워드</li>
+            </ul>
+            <div class="image-placeholder stagger-item">
+                <i data-lucide="wrench" class="placeholder-icon"></i>
+                <p>Architect Blueprint Visual</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: TCREI -->
+        <div class="slide"
+            data-notes="설계자의 핵심 무기, TCREI입니다. Task, Context, Reference, Evaluation, Iteration의 약자로, AI에게 명확한 가이드를 주는 표준입니다.">
+            <h2>THE BLUEPRINT: TCREI</h2>
+            <div class="card stagger-item" style="border-left: 4px solid var(--accent-green);">
+                <p><span class="accent">T</span>ask: 작업을 명확히 정의</p>
+                <p><span class="accent">C</span>ontext: 배경 지식 제공</p>
+                <p><span class="accent">R</span>eference: 예시와 가이드라인</p>
+                <p><span class="accent">E</span>valuate: 결과물 검증</p>
+                <p><span class="accent">I</span>terate: 설계서 개선 및 반복</p>
+            </div>
+            <p style="margin-top: 2rem;">"코드가 아닌 <span class="accent">지시의 품질</span>이 결과의 품질을 결정합니다."</p>
+        </div>
+
+        <!-- Slide 8: Stage 2 -->
+        <div class="slide" data-notes="2단계에서는 첫 번째 서비스를 직접 구축합니다. TDD를 통해 AI의 성과를 측정하는 법을 배웁니다.">
+            <h3>[Stage 2] Build & Verify</h3>
+            <h2>$ cd /phase/02_principles</h2>
+            <ul>
+                <li>Day 05: <span class="accent">TDD & Clean Architecture</span> - 검증 가능한 코드 설계</li>
+                <li>Day 06-07: SaaS 랜딩 페이지 기획, 디자인, 구현</li>
+                <li>Day 08: 수파베이스 연동 블로그 서비스 (Auth & CRUD)</li>
+            </ul>
+            <div class="image-placeholder stagger-item">
+                <i data-lucide="building-2" class="placeholder-icon"></i>
+                <p>Digital Construction Visual</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Stage 3 -->
+        <div class="slide" data-notes="3단계는 이 과정의 하이라이트 중 하나입니다. 지능형 챗봇과 병렬 에이전트 매니징을 다룹니다.">
+            <h3>[Stage 3] Advanced Managing</h3>
+            <h2>$ cd /phase/03_advanced</h2>
+            <ul>
+                <li>Day 09-10: <span class="accent">RAG 챗봇</span> - 데이터 검색 및 생성 병합</li>
+                <li>Day 11-12: 쇼핑몰 대시보드 - 에이전트 <span class="accent">병렬 운용</span> 실습</li>
+            </ul>
+            <div class="image-container stagger-item">
+                <img src="neon_dashboard_ui_1775550768120.png" alt="Dashboard UI">
+            </div>
+        </div>
+
+        <!-- Slide 10: Parallel Agents -->
+        <div class="slide"
+            data-notes="한 명의 개발자가 여러 기능(예: 상품 등록, 주문 관리, 유저 관리)을 동시에 구현하게 하는 방법입니다. 매니저 뷰를 활용합니다. [2 min]">
+            <h2>AGENT ORCHESTRATION</h2>
+            <p>매니저 뷰: 복수 에이전트 동시 지휘</p>
+            <div class="grid">
+                <div class="card">
+                    <p class="accent">Agent Alpha</p>
+                    <p>Auth & Security</p>
+                </div>
+                <div class="card">
+                    <p class="accent">Agent Beta</p>
+                    <p>Product Listing</p>
+                </div>
+                <div class="card">
+                    <p class="accent">Agent Gamma</p>
+                    <p>Order Pipeline</p>
+                </div>
+            </div>
+            <p style="margin-top: 2rem;">"에이전트의 진행 상황을 모니터링하고 <span class="cyan">가이드의 충돌을 방지</span>하는 것이 관리의 핵심입니다."</p>
+        </div>
+
+        <!-- Slide 11: Stage 4 -->
+        <div class="slide" data-notes="마지막 단계입니다. 상용 수준의 구독 결제 시스템을 구현하고 실제 배포와 로그 분석을 수행합니다.">
+            <h3>[Stage 4] Launch & Professional</h3>
+            <h2>$ cd /phase/04_realworld</h2>
+            <ul>
+                <li>Day 13: 구독 결제 SaaS - 외부 API 연동 (MCP)</li>
+                <li>Day 14: 버셀 배포 & <span class="accent">로그 분석 실전</span></li>
+                <li>Day 15-16: 프로젝트 완성 및 <span class="accent">포트폴리오 발표</span></li>
+            </ul>
+            <div class="image-placeholder stagger-item">
+                <i data-lucide="rocket" class="placeholder-icon"></i>
+                <p>Launch & Deployment Visual</p>
+            </div>
+        </div>
+
+        <!-- Slide 12: Evaluation -->
+        <div class="slide" data-notes="평가 기준입니다. 결과물뿐만 아니라 '설계서의 정교함'과 'AI 활용 전략'이 큰 비중을 차지합니다.">
+            <h2>EVALUATION CRITERIA</h2>
+            <div class="grid">
+                <div class="card">
+                    <i data-lucide="award" class="card-icon"></i>
+                    <h4>최종 프로젝트 (25%)</h4>
+                    <p>완성도 및 기획력</p>
+                </div>
+                <div class="card" style="border-color: var(--accent-magenta);">
+                    <i data-lucide="edit-3" class="card-icon" style="stroke: var(--accent-magenta); filter: drop-shadow(0 0 5px var(--accent-magenta));"></i>
+                    <h4>일일 과제 (25%)</h4>
+                    <p>지속적인 학습 태도</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="shield-check" class="card-icon"></i>
+                    <h4>설계서 품질 (15%)</h4>
+                    <p>TCREI 적용 정확도</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="folder-git-2" class="card-icon"></i>
+                    <h4>포트폴리오 (10%)</h4>
+                    <p>GitHub 관리 및 README</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Closing -->
+        <div class="slide"
+            data-notes="마지막으로 드릴 말씀은, 이제 더 이상 무엇을 '어떻게 짜느냐'보다 무엇을 '왜 만드느냐'가 중요해졌다는 것입니다. 함께 설계자의 길로 나아갑시다. 감사합니다.">
+            <h1>QUESTIONS?</h1>
+            <h3 class="cyan">Your Journey as an AI Architect Begins Now.</h3>
+            <div style="margin-top: 4rem;">
+                <p>Email: dandycode.kr@gmail.com</p>
+                <p>GitHub: github.com/postforty</p>
+            </div>
+            <p class="stagger-item accent" style="font-family: var(--font-mono); margin-top: 2rem;">$ exit --success</p>
+        </div>
+    </div>
+
+    <!-- UI Elements -->
+    <div class="progress-bar" id="progress"></div>
+    <div class="counter" id="slide-counter">1 / 13</div>
+
+    <div class="controls">
+        <button id="prevBtn" title="Previous (Left Arrow / Left Swipe)">PREV</button>
+        <button id="nextBtn" title="Next (Right Arrow / Right Swipe / Space)">NEXT</button>
+        <button id="notesBtn" title="Toggle Speaker Notes (S)">NOTES</button>
+        <button id="fullscreenBtn" title="Toggle Fullscreen (F)">FULL</button>
+    </div>
+
+    <div id="notes-panel">
+        <h3>SPEAKER NOTES</h3>
+        <div id="notes-content"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const notesBtn = document.getElementById('notesBtn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const slideCounter = document.getElementById('slide-counter');
+        const progressBar = document.getElementById('progress');
+        const notesPanel = document.getElementById('notes-panel');
+        const notesContent = document.getElementById('notes-content');
+
+        let currentSlide = 0;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+
+            // Update UI
+            slideCounter.innerText = `${currentSlide + 1} / ${slides.length}`;
+            progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+
+            // Update Notes
+            const activeSlide = slides[currentSlide];
+            notesContent.innerText = activeSlide.getAttribute('data-notes') || "No notes for this slide.";
+
+            // Trigger animations
+            const staggerItems = activeSlide.querySelectorAll('.stagger-item');
+            staggerItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Re-highlight code
+            Prism.highlightAll();
+
+            // Initialize Lucide Icons
+            lucide.createIcons();
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function toggleNotes() {
+            notesPanel.classList.toggle('open');
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Event Listeners
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        notesBtn.addEventListener('click', toggleNotes);
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+        // Keyboard
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key.toLowerCase() === 'n' || e.key.toLowerCase() === 's') toggleNotes();
+            if (e.key.toLowerCase() === 'f') toggleFullscreen();
+        });
+
+        // Swipe
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) nextSlide();
+            if (touchEndX - touchStartX > 50) prevSlide();
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+
+</html>
