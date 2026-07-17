@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>쫀득함의 인류학과 감각적 카타르시스</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            background-color: rgb(250, 251, 248);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-title {
+            font-size: 52px;
+            font-weight: 900;
+            color: rgb(87, 117, 144);
+            line-height: 1.2;
+            text-align: center;
+            letter-spacing: -1.5px;
+        }
+
+        .section-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: rgb(87, 117, 144);
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-text {
+            font-size: 18px;
+            color: #444444;
+            line-height: 1.6;
+            text-align: center;
+            word-break: keep-all;
+        }
+
+        .top-accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 30px;
+            background-color: rgb(87, 117, 144);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            z-index: 10;
+        }
+
+        .top-accent-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 30px;
+            background-color: rgb(163, 177, 138);
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+            z-index: 10;
+        }
+
+        .bottom-accent {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 20%;
+            height: 20px;
+            background-color: rgb(87, 117, 144);
+            clip-path: polygon(0 0, 100% 100%, 0 100%);
+            z-index: 10;
+        }
+
+        .bottom-accent-right {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 70%;
+            height: 20px;
+            background-color: rgb(163, 177, 138);
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+            z-index: 10;
+        }
+
+        .column-bg {
+            background-color: rgba(218, 223, 202, 0.4);
+            border-radius: 16px;
+            padding: 32px 24px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(163, 177, 138, 0.3);
+            box-shadow: 0 4px 6px rgba(87, 117, 144, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .column-bg:hover {
+            transform: translateY(-5px);
+            background-color: rgba(218, 223, 202, 0.6);
+        }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: white;
+            border: 3px dashed rgb(87, 117, 144);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .icon-circle i {
+            font-size: 32px;
+            color: rgb(87, 117, 144);
+        }
+
+        .step-arrow {
+            position: absolute;
+            top: 50%;
+            right: -34px;
+            font-size: 24px;
+            color: rgb(163, 177, 138);
+            z-index: 20;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Top Accents -->
+        <div class="top-accent"></div>
+        <div class="top-accent-right"></div>
+        <!-- Main Content -->
+        <div class="flex flex-col h-full px-20 py-16">
+            <!-- Main Heading -->
+            <div class="mb-16 mt-8 w-full text-center">
+                <h1 class="main-title">
+                    쫀득함의 인류학과<br />
+                    감각적 카타르시스
+                </h1>
+                <p class="mt-6 text-xl text-gray-600 font-medium">
+                    한국인의 정서적 상징인 '쫀득함'이 주는 심리적 위로와 식감의 진화
+                </p>
+            </div>
+            <!-- Three Columns Section -->
+            <div class="flex flex-1 space-x-10 justify-center items-stretch pb-8">
+                <!-- First Column: Origin -->
+                <div class="w-1/3 relative">
+                    <div class="column-bg">
+                        <div class="icon-circle">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h2 class="section-title">문화적 원형:<br />떡과 찰기</h2>
+                        <p class="section-text mt-2">
+                            '찰지다'는 표현이 주는 끈끈한 정서적 유대감. 떡 문화에서 기인한 '쫀득한 식감'은 한국인에게 끈기와 복을 상징하는 깊은 문화적 코드입니다.
+                        </p>
+                    </div>
+                    <!-- Arrow to next step -->
+                    <div class="step-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <!-- Second Column: Mechanism -->
+                <div class="w-1/3 relative">
+                    <div class="column-bg">
+                        <div class="icon-circle">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h2 class="section-title">심리적 기제:<br />저작의 쾌감</h2>
+                        <p class="section-text mt-2">
+                            반복적인 저작 운동이 주는 뇌의 보상 회로 자극. 씹는 행위의 저항감(Chewiness)은 스트레스를 완화하고 심리적 안식을 제공하는 도구로 기능합니다.
+                        </p>
+                    </div>
+                    <!-- Arrow to next step -->
+                    <div class="step-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <!-- Third Column: Evolution -->
+                <div class="w-1/3 relative">
+                    <div class="column-bg">
+                        <div class="icon-circle">
+                            <i class="fas fa-cookie-bite"></i>
+                        </div>
+                        <h2 class="section-title">식감의 진화:<br />겉쫀속바</h2>
+                        <p class="section-text mt-2">
+                            전통적 쫀득함에 카다이프의 이국적 바삭함을 결합했습니다. 익숙함 속에 새로움을 더한 '겉쫀속바'의 입체적 변주는 감각적 경험을 극대화합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bottom Accents -->
+        <div class="bottom-accent"></div>
+        <div class="bottom-accent-right"></div>
+    </div>
+</body>
+
+</html>

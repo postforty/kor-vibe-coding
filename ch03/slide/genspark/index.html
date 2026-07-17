@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genspark 프리젠테이션</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000; /* 전체화면 느낌을 위해 검정색 배경 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow: hidden;
+        }
+        
+        /* 슬라이드 원본 크기를 유지하되 JS로 스케일링 */
+        .presentation-container {
+            position: relative;
+            width: 1280px;
+            height: 720px;
+            background-color: #fff;
+            transform-origin: center center;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 컨트롤 패널 - 버튼은 숨김 */
+        #controls {
+            display: none; /* 전체화면 시 방해되지 않도록 숨김 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-container" id="presentation-container">
+        <iframe id="slide-frame" src="slide1.html" title="slide"></iframe>
+    </div>
+    
+    <div id="controls">
+        <button id="prev-btn">이전</button>
+        <div id="page-indicator">1 / 5</div>
+        <button id="next-btn">다음</button>
+    </div>
+
+    <script>
+        // 슬라이드 파일 목록 (원하는 순서대로 변경 가능)
+        const slides = [
+            'slide1.html',
+            'slide2.html',
+            'slide3.html',
+            'slide4.html',
+            'slide5.html'
+        ];
+        
+        let currentIndex = 0;
+        const iframe = document.getElementById('slide-frame');
+        const indicator = document.getElementById('page-indicator');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        function updateSlide() {
+            iframe.src = slides[currentIndex];
+            indicator.textContent = `${currentIndex + 1} / ${slides.length}`;
+            
+            // 버튼 상태 업데이트
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === slides.length - 1;
+        }
+
+        function goNext() {
+            if (currentIndex < slides.length - 1) {
+                currentIndex++;
+                updateSlide();
+            }
+        }
+
+        function goPrev() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlide();
+            }
+        }
+
+        prevBtn.addEventListener('click', goPrev);
+        nextBtn.addEventListener('click', goNext);
+
+        // 부모 창 키보드 이벤트
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                goNext();
+            } else if (e.key === 'ArrowLeft') {
+                goPrev();
+            }
+        });
+        
+        // iframe 내부 키보드 이벤트 (포커스가 iframe에 있을 때도 작동하도록)
+        iframe.onload = function() {
+            try {
+                iframe.contentWindow.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        goNext();
+                    } else if (e.key === 'ArrowLeft') {
+                        goPrev();
+                    }
+                });
+            } catch (e) {
+                console.log('CORS 에러로 인해 iframe 내부 접근이 제한될 수 있습니다. (로컬 파일 시스템 등)');
+            }
+        };
+
+        // 초기화
+        updateSlide();
+        
+        // 브라우저 창 크기에 맞춰 슬라이드 꽉 차게 스케일링
+        function resizePresentation() {
+            const container = document.getElementById('presentation-container');
+            // 창의 너비와 높이 중 비율이 작은 쪽에 맞춰서 확대/축소
+            const scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+            container.style.transform = `scale(${scale})`;
+        }
+
+        // 창 크기 조절 시 이벤트 등록
+        window.addEventListener('resize', resizePresentation);
+        
+        // 처음 로딩 시 크기 조절
+        resizePresentation();
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>디지털 미디어 생태계가 만든 상징적 소비와 확산</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Nanum Gothic', 'Noto Sans KR', sans-serif;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            background-color: rgb(250, 251, 248);
+            overflow: hidden;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: rgb(87, 117, 144);
+            margin-bottom: 8px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .section-text {
+            font-size: 16px;
+            color: #444444;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 800;
+            color: rgb(87, 117, 144);
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .rounded-image {
+            border-radius: 24px;
+            overflow: hidden;
+            border: 3px solid rgb(218, 223, 202);
+            height: 480px;
+            width: 100%;
+            position: relative;
+        }
+
+        .rounded-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .blue-accent {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 60px;
+            background-color: rgb(87, 117, 144);
+            clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .decorative-line {
+            background-color: rgb(163, 177, 138);
+            height: 3px;
+            width: 80px;
+            border-radius: 2px;
+        }
+
+        .right-column-bg {
+            background-color: rgba(218, 223, 202, 0.15);
+        }
+
+        .list-item-container {
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .check-icon {
+            position: absolute;
+            left: -35px;
+            top: 2px;
+            color: rgb(163, 177, 138);
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container flex">
+        <!-- Left Column - Image and Title -->
+        <div class="w-1/2 p-12 flex flex-col h-full relative z-10">
+            <!-- Image -->
+            <div class="rounded-image shadow-lg mb-8">
+                <img alt="SNS Food Photography with Smartphone"
+                    class="transform hover:scale-105 transition-transform duration-700"
+                    src="https://www.genspark.ai/image_placeholder.png" />
+                <!-- Overlay badge for visual interest -->
+                <div
+                    style="position: absolute; bottom: 20px; right: 20px; background-color: rgba(255,255,255,0.9); padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 700; color: rgb(87, 117, 144); box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <i class="fab fa-instagram mr-2"></i>#두쫀쿠 #디저트그램
+                </div>
+            </div>
+            <!-- Main Heading -->
+            <div class="mt-auto relative">
+                <h1 class="main-title">
+                    디지털 미디어 생태계가<br />
+                    만든 상징적 소비와 확산
+                </h1>
+                <div style="width: 100px; height: 6px; background-color: rgb(163, 177, 138); margin-top: 20px;"></div>
+            </div>
+        </div>
+        <!-- Right Column - Training Need Sections -->
+        <div class="w-1/2 p-12 flex flex-col justify-center space-y-12 right-column-bg h-full relative">
+            <!-- Section 1 -->
+            <div class="list-item-container">
+                <i class="fas fa-camera check-icon"></i>
+                <div class="decorative-line mb-3"></div>
+                <h2 class="section-title">인스타그래머블 비주얼 (Instagrammable)</h2>
+                <p class="section-text">
+                    시각적 쾌감을 극대화한 '단면의 미학'이 숏폼 콘텐츠에 최적화되어, 보는 것만으로도 식감을 상상하게 만드는 '비주얼 ASMR' 효과를 창출합니다.
+                </p>
+            </div>
+            <!-- Section 2 -->
+            <div class="list-item-container">
+                <i class="fas fa-users check-icon"></i>
+                <div class="decorative-line mb-3"></div>
+                <h2 class="section-title">디토(Ditto) 소비와 팬덤</h2>
+                <p class="section-text">
+                    "나도"라는 뜻의 디토 소비 성향이 강해지며, 유명 인플루언서의 소비를 추종하고 인증함으로써 트렌드 집단에 소속되려는 욕구를 충족합니다.
+                </p>
+            </div>
+            <!-- Section 3 -->
+            <div class="list-item-container">
+                <i class="fas fa-map-marked-alt check-icon"></i>
+                <div class="decorative-line mb-3"></div>
+                <h2 class="section-title">능동적 프로슈머(Prosumer) 활동</h2>
+                <p class="section-text">
+                    소비자가 단순 구매자를 넘어 '두쫀쿠 지도'를 제작하고 실시간 재고 정보를 공유하는 등, 유행의 확산과 정보 재생산을 주도하는 주체로 진화했습니다.
+                </p>
+            </div>
+            <!-- Decorative Bottom Element -->
+            <div class="mt-8 ml-4">
+                <div
+                    style="background-color: rgb(163, 177, 138); height: 8px; width: 320px; border-radius: 4px; opacity: 0.7;">
+                </div>
+            </div>
+        </div>
+        <!-- Blue Accent at Bottom -->
+        <div class="blue-accent"></div>
+    </div>
+</body>
+
+</html>

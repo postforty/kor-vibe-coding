@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>두바이 쫀득 쿠키 열풍의 본질과 글로컬라이제이션</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            background-color: rgb(250, 251, 248);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title-text {
+            font-size: 54px;
+            font-weight: 700;
+            color: #222222;
+            line-height: 1.2;
+            letter-spacing: -1.5px;
+        }
+
+        .subtitle-text {
+            font-size: 20px;
+            color: rgb(87, 117, 144);
+            font-weight: 500;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-text {
+            font-size: 16px;
+            color: #444444;
+            line-height: 1.6;
+            word-break: keep-all;
+        }
+
+        .blue-corner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 180px;
+            background-color: rgb(87, 117, 144);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            z-index: 0;
+        }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px dashed rgb(163, 177, 138);
+            background-color: rgba(218, 223, 202, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+
+        .icon-circle i {
+            font-size: 32px;
+            color: rgb(87, 117, 144);
+        }
+
+        .bottom-accent {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background-color: rgb(87, 117, 144);
+        }
+
+        .dots-pattern {
+            position: absolute;
+            right: 40px;
+            top: 45%;
+            display: grid;
+            grid-template-columns: repeat(5, 6px);
+            grid-template-rows: repeat(10, 6px);
+            grid-gap: 8px;
+            z-index: 0;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background-color: rgb(163, 177, 138);
+            opacity: 0.6;
+            border-radius: 50%;
+        }
+
+        .image-container {
+            position: relative;
+            z-index: 10;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(87, 117, 144, 0.15);
+            height: 380px;
+            width: 100%;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .main-content-wrapper {
+            flex: 1;
+            display: flex;
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Blue Corner Decoration -->
+        <div class="blue-corner"></div>
+        <!-- Main Content Layout -->
+        <div class="main-content-wrapper">
+            <!-- Left Column - Title Area -->
+            <div class="w-1/2 px-16 pt-24 pb-12 flex flex-col justify-start relative z-10">
+                <div class="mb-4">
+                    <span
+                        class="inline-block px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-bold tracking-wide mb-4">TREND
+                        ANALYSIS 01</span>
+                    <h1 class="title-text mb-6">
+                        <span style="color: rgb(87, 117, 144);">두바이 쫀득 쿠키</span><br />
+                        열풍의 본질과<br />
+                        글로컬라이제이션
+                    </h1>
+                </div>
+                <p class="subtitle-text">
+                    중동의 이색 식재료와 한국적 식감이 결합하여 탄생한<br />
+                    '신장르 디저트'이자 성공적인 현지화(Localization) 사례
+                </p>
+                <div style="width: 60px; height: 4px; background-color: rgb(163, 177, 138); border-radius: 2px;"></div>
+            </div>
+            <!-- Right Column - Hero Image -->
+            <div class="w-1/2 pr-16 pt-20 flex items-start justify-center relative">
+                <div class="image-container">
+                    <img alt="두바이 초콜릿 쫀득 쿠키 단면 이미지"
+                        src="https://page.gensparksite.com/slides_images/2f657c50c7b1c9feb99690db89c080fa.webp" />
+                </div>
+            </div>
+        </div>
+        <!-- Three Columns Section (Key Components) -->
+        <div class="absolute bottom-16 left-0 right-0 px-16 z-20">
+            <div
+                class="flex space-x-12 bg-white bg-opacity-60 backdrop-filter backdrop-blur-sm rounded-xl p-6 border border-gray-100 shadow-sm">
+                <!-- Component 1: Kataifi -->
+                <div class="w-1/3 text-center">
+                    <div class="icon-circle">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h2 class="section-title">카다이프 (Kataifi)</h2>
+                    <p class="section-text">
+                        중동의 얇은 국수면을 버터에 볶아 넣어<br />
+                        이국적인 비주얼과 극강의 바삭함을 선사
+                    </p>
+                </div>
+                <!-- Component 2: Pistachio -->
+                <div class="w-1/3 text-center">
+                    <div class="icon-circle">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h2 class="section-title">피스타치오 (Pistachio)</h2>
+                    <p class="section-text">
+                        고소하고 진한 원물 스프레드를 활용하여<br />
+                        프리미엄 풍미와 트렌디한 희소성을 강조
+                    </p>
+                </div>
+                <!-- Component 3: Marshmallow -->
+                <div class="w-1/3 text-center">
+                    <div class="icon-circle">
+                        <i class="fas fa-cookie-bite"></i>
+                    </div>
+                    <h2 class="section-title">마시멜로 (Marshmallow)</h2>
+                    <p class="section-text">
+                        한국인이 선호하는 '쫀득함'을 더해<br />
+                        식감의 밸런스를 맞춘 한국형 현지화 요소
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative Dots Pattern -->
+        <div class="dots-pattern">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <!-- Bottom Accent -->
+        <div class="bottom-accent"></div>
+    </div>
+</body>
+
+</html>
