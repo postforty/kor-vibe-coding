@@ -21,14 +21,29 @@ export default function Editor({ initialMarkdown, onChange }: EditorProps) {
     async function init() {
       const e = BlockNoteEditor.create({
         uploadFile: async (file: File) => {
-          const body = new FormData();
-          body.append("file", file);
-          const ret = await fetch("/api/upload", {
-            method: "POST",
-            body: body,
-          });
-          const data = await ret.json();
-          return data.url;
+          try {
+            const { BaseDirectory, writeFile, exists, mkdir } = await import('@tauri-apps/plugin-fs');
+            const { appDataDir, join } = await import('@tauri-apps/api/path');
+            const { convertFileSrc } = await import('@tauri-apps/api/core');
+
+            const buffer = await file.arrayBuffer();
+            const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+            const filename = uniqueSuffix + '-' + file.name.replace(/[^a-zA-Z0-9.]/g, '_');
+            
+            const dirExists = await exists('uploads', { baseDir: BaseDirectory.AppData });
+            if (!dirExists) {
+              await mkdir('uploads', { baseDir: BaseDirectory.AppData, recursive: true });
+            }
+
+            await writeFile(`uploads/${filename}`, new Uint8Array(buffer), { baseDir: BaseDirectory.AppData });
+            
+            const appDataPath = await appDataDir();
+            const fullPath = await join(appDataPath, 'uploads', filename);
+            return convertFileSrc(fullPath);
+          } catch (e) {
+            console.error("Upload error", e);
+            return "";
+          }
         }
       });
       if (initialMarkdown) {

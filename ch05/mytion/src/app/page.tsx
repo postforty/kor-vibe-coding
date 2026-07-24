@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { BaseDirectory, readDir, readTextFile, writeTextFile, mkdir, exists, stat } from '@tauri-apps/plugin-fs';
 
 const Editor = dynamic(() => import('@/components/Editor'), { ssr: false });
 
@@ -22,13 +23,33 @@ export default function Home() {
   const [isNewFileDialogOpen, setIsNewFileDialogOpen] = useState(false);
   const [newFileName, setNewFileName] = useState('');
   
+  const initDir = async () => {
+    try {
+      const dirExists = await exists('documents', { baseDir: BaseDirectory.AppData });
+      if (!dirExists) {
+        await mkdir('documents', { baseDir: BaseDirectory.AppData, recursive: true });
+      }
+    } catch (e) {
+      console.error("Failed to init dir", e);
+    }
+  };
+
   const fetchFiles = async () => {
     try {
-      const res = await fetch('/api/files');
-      if (res.ok) {
-        const data = await res.json();
-        setFiles(data);
-      }
+      await initDir();
+      const entries = await readDir('documents', { baseDir: BaseDirectory.AppData });
+      const mdFiles = entries.filter(e => e.name?.endsWith('.md'));
+      
+      const fileStats = await Promise.all(mdFiles.map(async (file) => {
+        const fileStat = await stat(`documents/${file.name}`, { baseDir: BaseDirectory.AppData });
+        return {
+          name: file.name as string,
+          lastModified: fileStat.mtime?.getTime() || 0,
+        };
+      }));
+
+      fileStats.sort((a, b) => b.lastModified - a.lastModified);
+      setFiles(fileStats);
     } catch (e) {
       console.error(e);
     }
@@ -40,12 +61,9 @@ export default function Home() {
 
   const handleSelectFile = async (filename: string) => {
     try {
-      const res = await fetch(`/api/files/${filename}`);
-      if (res.ok) {
-        const data = await res.json();
-        setMarkdown(data.content);
-        setCurrentFile(filename);
-      }
+      const content = await readTextFile(`documents/${filename}`, { baseDir: BaseDirectory.AppData });
+      setMarkdown(content);
+      setCurrentFile(filename);
     } catch (e) {
       console.error(e);
     }
@@ -67,13 +85,12 @@ export default function Home() {
     const initialContent = `# ${name.replace('.md', '')}\n\n`;
     setMarkdown(initialContent);
     
-    // Auto-create it right away
-    await fetch('/api/files', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ filename, content: initialContent }),
-    });
-    fetchFiles();
+    try {
+      await writeTextFile(`documents/${filename}`, initialContent, { baseDir: BaseDirectory.AppData });
+      fetchFiles();
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   // Auto-save logic
@@ -82,14 +99,14 @@ export default function Home() {
 
     const timeoutId = setTimeout(async () => {
       setIsSaving(true);
-      await fetch('/api/files', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ filename: currentFile, content: markdown }),
-      });
+      try {
+        await writeTextFile(`documents/${currentFile}`, markdown, { baseDir: BaseDirectory.AppData });
+        // Fetch files silently to update order if needed
+        fetchFiles();
+      } catch (e) {
+        console.error(e);
+      }
       setIsSaving(false);
-      // Fetch files silently to update order if needed
-      fetchFiles();
     }, 1000); // 1s debounce
 
     return () => clearTimeout(timeoutId);
@@ -154,3 +171,4 @@ export default function Home() {
     </>
   );
 }
+
