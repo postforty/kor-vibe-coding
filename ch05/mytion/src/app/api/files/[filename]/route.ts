@@ -6,7 +6,7 @@ const documentsDir = path.join(process.cwd(), 'documents');
 
 export async function GET(
   request: Request,
-  { params }: { params: { filename: string } }
+  { params }: { params: Promise<{ filename: string }> }
 ) {
   const { filename } = await params;
   const filePath = path.join(documentsDir, filename);
@@ -24,7 +24,7 @@ export async function GET(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { filename: string } }
+  { params }: { params: Promise<{ filename: string }> }
 ) {
   const { filename } = await params;
   const filePath = path.join(documentsDir, filename);
