@@ -1,0 +1,10 @@
+[project]
+name = "nvidia-model"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "langchain-nvidia-ai-endpoints>=1.4.3",
+    "python-dotenv>=1.2.3",
+]
