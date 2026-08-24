@@ -24,9 +24,12 @@ def main():
     # - model_kwargs: 모델의 Thinking(사고 과정) 활성화 옵션 설정
     client = ChatNVIDIA(
         # model="nvidia/nemotron-3.5-lightning-30b-a3b",
+        # model="nvidia/nemotron-3-ultra-550b-a55b",
+        # model="meta/muse-glimmer-30b",
+        model="minimaxai/minimax-m3",
         # model="google/gemma-4-31b-it",
         # model="openai/gpt-oss-120b",
-        model="deepseek-ai/deepseek-v4-flash-0731",
+        # model="deepseek-ai/deepseek-v4-flash-0731",
         api_key=api_key,
         temperature=1,
         top_p=0.95,
