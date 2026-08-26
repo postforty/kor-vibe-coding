@@ -1,6 +1,6 @@
 # 📱 [바이브 코딩 실습 가이드] 구글 시트 & 드라이브 연동 '스마트 영수증 가계부' 만들기
 
-본 실습 교안은 **Google Apps Script(GAS)와** **Clasp CLI**를 활용하여, 별도의 서버나 DB 비용 없이 **Google Sheets(지출 장부 DB) + Google Drive(영수증 사진 스토리지) + Apps Script(웹 서버)**를 연동한 **'스마트 영수증 가계부'**를 AI 에이전트와 함께 구축하는 실습 가이드입니다.
+본 실습 교안은 **Google Apps Script(GAS)와** **Clasp CLI**를 활용하여, 별도의 서버나 DB 비용 없이 **Google Sheets(지출 장부 DB) + Google Drive(영수증 사진 스토리지) + Apps Script(웹 서버)를** 연동한 **'스마트 영수증 가계부'**를 AI 에이전트와 함께 구축하는 실습 가이드입니다.
 
 ---
 
