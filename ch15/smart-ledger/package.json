@@ -1,0 +1,23 @@
+{
+  "name": "smart-ledger",
+  "version": "1.0.0",
+  "description": "AI 에이전트와 함께 만드는 스마트 영수증 가계부 (Google Apps Script & Web App)",
+  "main": "Code.js",
+  "scripts": {
+    "push": "clasp push",
+    "pull": "clasp pull",
+    "open": "clasp open",
+    "deploy": "clasp deploy"
+  },
+  "keywords": [
+    "google-apps-script",
+    "clasp",
+    "vibe-coding",
+    "receipt-ledger"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@google/clasp": "^2.4.2"
+  }
+}

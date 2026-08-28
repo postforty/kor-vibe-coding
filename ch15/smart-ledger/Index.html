@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>📱 스마트 영수증 가계부</title>
+  <!-- Google Fonts: Pretendard / Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #eff6ff;
+      --secondary: #0ea5e9;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --danger: #ef4444;
+      --danger-bg: #fef2f2;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 14px 36px rgba(37, 99, 235, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #e2e8f0;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      background-color: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+      position: relative;
+      padding-bottom: 40px;
+    }
+
+    /* Top App Bar */
+    .app-header {
+      padding: 16px 20px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .app-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+    }
+
+    .app-logo span.badge {
+      font-size: 11px;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 7px;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      background: #f1f5f9;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 15px;
+      transition: all 0.2s ease;
+    }
+
+    .icon-btn:active {
+      transform: scale(0.92);
+      background: #e2e8f0;
+    }
+
+    /* Main Content */
+    .content-area {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Budget / Monthly Summary Card */
+    .summary-card {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb, #3b82f6);
+      color: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 22px 20px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .summary-card::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .summary-label {
+      font-size: 13px;
+      opacity: 0.9;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .summary-amount {
+      font-size: 30px;
+      font-weight: 800;
+      margin: 10px 0 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .progress-container {
+      background: rgba(255, 255, 255, 0.2);
+      height: 8px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #38bdf8;
+      border-radius: 10px;
+      width: 0%;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .progress-bar.over {
+      background: #f87171;
+    }
+
+    .summary-details {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    /* Budget Alert Banner (Quest 1) */
+    .alert-banner {
+      background: var(--danger-bg);
+      border: 1px solid #fca5a5;
+      color: var(--danger);
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: pulseAlert 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseAlert {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.01); }
+    }
+
+    /* Card Section */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 15px;
+      color: var(--text-main);
+      background: #fdfdfd;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .input-field:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    /* Money Input Highlight */
+    .money-input-wrapper {
+      position: relative;
+    }
+
+    .money-prefix {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--primary);
+    }
+
+    .money-input {
+      padding-left: 36px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Chip Selection */
+    .chip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .chip-btn {
+      padding: 9px 8px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .chip-btn.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.15);
+    }
+
+    .chip-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Payment Method Chips */
+    .pay-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .pay-btn {
+      padding: 8px 4px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .pay-btn.active {
+      border-color: #1e293b;
+      background: #1e293b;
+      color: #ffffff;
+    }
+
+    /* Receipt Upload Area */
+    .receipt-upload-box {
+      border: 2px dashed #cbd5e1;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      background: #f8fafc;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .receipt-upload-box:active {
+      background: #f1f5f9;
+      border-color: var(--primary);
+    }
+
+    .receipt-upload-box input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-icon {
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+
+    .upload-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .upload-subtext {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Preview Thumbnail */
+    .receipt-preview {
+      margin-top: 10px;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .receipt-preview img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .delete-photo-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(15, 23, 42, 0.75);
+      color: #ffffff;
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .submit-btn:active {
+      transform: scale(0.98);
+    }
+
+    .submit-btn:disabled {
+      background: #94a3b8;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #ffffff;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Recent Expenses List */
+    .expense-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .expense-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      background: #f8fafc;
+      border-radius: var(--radius-md);
+      border: 1px solid #f1f5f9;
+      transition: all 0.2s;
+    }
+
+    .expense-item:hover {
+      background: #f1f5f9;
+    }
+
+    .item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .item-icon {
+      width: 40px;
+      height: 40px;
+      background: #ffffff;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      flex-shrink: 0;
+    }
+
+    .item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .item-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .item-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .item-right {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+
+    .item-amount {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .receipt-link-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11px;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 30px 10px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1e293b;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Bottom Quest Action */
+    .quest-card {
+      background: #f1f5f9;
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .quest-text {
+      font-size: 12px;
+      color: #475569;
+      font-weight: 500;
+    }
+
+    .quest-btn {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="app-logo">
+        <span>📱 스마트 영수증 가계부</span>
+        <span class="badge">GAS V8</span>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" id="refreshBtn" title="새로고침">🔄</button>
+      </div>
+    </header>
+
+    <div class="content-area">
+      <!-- Monthly Summary & Budget Progress Card -->
+      <section class="summary-card">
+        <div class="summary-label">
+          <span id="currentMonthLabel">이번 달 총 지출</span>
+          <span id="summaryCount">0건 기록됨</span>
+        </div>
+        <div class="summary-amount" id="totalAmountDisplay">₩0</div>
+        
+        <div class="progress-container">
+          <div class="progress-bar" id="budgetProgressBar"></div>
+        </div>
+
+        <div class="summary-details">
+          <span>예산: <b id="budgetDisplay">₩1,000,000</b></span>
+          <span>잔여: <b id="remainingDisplay">₩1,000,000</b> (<span id="usageRateDisplay">0%</span>)</span>
+        </div>
+      </section>
+
+      <!-- Budget Exceeded Alert (Quest 1) -->
+      <div class="alert-banner" id="budgetAlert" style="display: none;">
+        <span>⚠️</span>
+        <span>이번 달 예산을 초과했습니다! 지출 관리에 유의하세요.</span>
+      </div>
+
+      <!-- Expense Registration Form -->
+      <section class="card">
+        <h2 class="card-title">📝 새 지출 등록</h2>
+        
+        <form id="expenseForm">
+          <!-- Date -->
+          <div class="form-group">
+            <label class="form-label" for="expenseDate">지출 일자</label>
+            <input type="date" id="expenseDate" class="input-field" required>
+          </div>
+
+          <!-- Category Chips -->
+          <div class="form-group">
+            <label class="form-label">카테고리 분류</label>
+            <div class="chip-grid" id="categoryChips">
+              <button type="button" class="chip-btn active" data-value="🍽️ 식비">🍽️ 식비</button>
+              <button type="button" class="chip-btn" data-value="🚗 교통">🚗 교통</button>
+              <button type="button" class="chip-btn" data-value="🛍️ 쇼핑">🛍️ 쇼핑</button>
+              <button type="button" class="chip-btn" data-value="☕ 카페/간식">☕ 카페</button>
+              <button type="button" class="chip-btn" data-value="🎬 문화">🎬 문화</button>
+              <button type="button" class="chip-btn" data-value="💡 기타">💡 기타</button>
+            </div>
+            <input type="hidden" id="selectedCategory" value="🍽️ 식비">
+          </div>
+
+          <!-- Amount -->
+          <div class="form-group">
+            <label class="form-label" for="amountInput">지출 금액</label>
+            <div class="money-input-wrapper">
+              <span class="money-prefix">₩</span>
+              <input type="text" id="amountInput" class="input-field money-input" placeholder="0" inputmode="numeric" required>
+            </div>
+          </div>
+
+          <!-- Title (Store name) -->
+          <div class="form-group">
+            <label class="form-label" for="titleInput">사용처 (상호명)</label>
+            <input type="text" id="titleInput" class="input-field" placeholder="예: 스타벅스 강남점, 이마트" required>
+          </div>
+
+          <!-- Payment Method -->
+          <div class="form-group">
+            <label class="form-label">결제 수단</label>
+            <div class="pay-grid" id="payChips">
+              <button type="button" class="pay-btn active" data-value="신용카드">신용카드</button>
+              <button type="button" class="pay-btn" data-value="체크카드">체크카드</button>
+              <button type="button" class="pay-btn" data-value="간편결제">간편결제</button>
+              <button type="button" class="pay-btn" data-value="현금">현금</button>
+            </div>
+            <input type="hidden" id="selectedPayMethod" value="신용카드">
+          </div>
+
+          <!-- Receipt Camera Upload Box -->
+          <div class="form-group">
+            <label class="form-label">📸 영수증 첨부 (선택)</label>
+            <div class="receipt-upload-box" id="uploadBox">
+              <input type="file" id="receiptInput" accept="image/*" capture="environment">
+              <div class="upload-icon">📷</div>
+              <div class="upload-text">영수증 촬영 또는 사진 선택</div>
+              <div class="upload-subtext">구글 드라이브에 자동 보관됩니다</div>
+            </div>
+            
+            <div class="receipt-preview" id="previewContainer" style="display: none;">
+              <img id="previewImage" src="" alt="영수증 미리보기">
+              <button type="button" class="delete-photo-btn" id="deletePhotoBtn" title="사진 삭제">✕</button>
+            </div>
+          </div>
+
+          <!-- Memo -->
+          <div class="form-group">
+            <label class="form-label" for="memoInput">메모 (선택)</label>
+            <input type="text" id="memoInput" class="input-field" placeholder="간단한 메모 입력">
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <span id="btnText">지출 등록하기</span>
+            <div class="spinner" id="btnSpinner" style="display: none;"></div>
+          </button>
+        </form>
+      </section>
+
+      <!-- Recent Expenses List -->
+      <section class="card">
+        <h2 class="card-title">🕒 최근 지출 내역</h2>
+        <div class="expense-list" id="recentList">
+          <div class="empty-state">데이터를 불러오는 중입니다...</div>
+        </div>
+      </section>
+
+      <!-- Quest 2: Weekly Report Trigger Test -->
+      <div class="quest-card">
+        <div class="quest-text">📧 <b>주간 리포트 메일링</b> (확장 퀘스트)</div>
+        <button class="quest-btn" id="sendReportBtn">지금 테스트 발송</button>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">알림 메시지</div>
+  </div>
+
+  <script>
+    // State
+    let selectedImageBase64 = null;
+    let selectedImageName = '';
+
+    // DOM Elements
+    const expenseForm = document.getElementById('expenseForm');
+    const expenseDate = document.getElementById('expenseDate');
+    const amountInput = document.getElementById('amountInput');
+    const titleInput = document.getElementById('titleInput');
+    const memoInput = document.getElementById('memoInput');
+    const receiptInput = document.getElementById('receiptInput');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewImage = document.getElementById('previewImage');
+    const deletePhotoBtn = document.getElementById('deletePhotoBtn');
+    const uploadBox = document.getElementById('uploadBox');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
+    const recentList = document.getElementById('recentList');
+    const totalAmountDisplay = document.getElementById('totalAmountDisplay');
+    const summaryCount = document.getElementById('summaryCount');
+    const budgetDisplay = document.getElementById('budgetDisplay');
+    const remainingDisplay = document.getElementById('remainingDisplay');
+    const usageRateDisplay = document.getElementById('usageRateDisplay');
+    const budgetProgressBar = document.getElementById('budgetProgressBar');
+    const budgetAlert = document.getElementById('budgetAlert');
+    const currentMonthLabel = document.getElementById('currentMonthLabel');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const sendReportBtn = document.getElementById('sendReportBtn');
+    const toast = document.getElementById('toast');
+
+    // 1. Initialize Date & Month
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    expenseDate.value = `${yyyy}-${mm}-${dd}`;
+    currentMonthLabel.innerText = `${yyyy}년 ${today.getMonth() + 1}월 지출`;
+
+    // 2. Category Chips Click Event
+    document.querySelectorAll('#categoryChips .chip-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#categoryChips .chip-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('selectedCategory').value = btn.getAttribute('data-value');
+      });
+    });
+
+    // 3. Payment Method Chips Click Event
+    document.querySelectorAll('#payChips .pay-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#payChips .pay-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('selectedPayMethod').value = btn.getAttribute('data-value');
+      });
+    });
+
+    // 4. Amount Realtime 1,000 Comma Formatting
+    amountInput.addEventListener('input', (e) => {
+      let val = e.target.value.replace(/[^0-9]/g, '');
+      if (val) {
+        e.target.value = Number(val).toLocaleString('ko-KR');
+      } else {
+        e.target.value = '';
+      }
+    });
+
+    // 5. Receipt Image Capture & Preview (Base64)
+    receiptInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      selectedImageName = file.name;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        selectedImageBase64 = event.target.result;
+        previewImage.src = selectedImageBase64;
+        previewContainer.style.display = 'block';
+        uploadBox.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    deletePhotoBtn.addEventListener('click', () => {
+      selectedImageBase64 = null;
+      selectedImageName = '';
+      receiptInput.value = '';
+      previewImage.src = '';
+      previewContainer.style.display = 'none';
+      uploadBox.style.display = 'block';
+    });
+
+    // 6. Form Submission
+    expenseForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const rawAmount = amountInput.value.replace(/[^0-9]/g, '');
+      if (!rawAmount || Number(rawAmount) <= 0) {
+        showToast('⚠️ 금액을 정확히 입력해주세요.');
+        return;
+      }
+
+      const payload = {
+        date: expenseDate.value,
+        category: document.getElementById('selectedCategory').value,
+        amount: Number(rawAmount),
+        title: titleInput.value.trim(),
+        payMethod: document.getElementById('selectedPayMethod').value,
+        memo: memoInput.value.trim(),
+        receiptData: selectedImageBase64,
+        receiptName: selectedImageName
+      };
+
+      setLoading(true);
+
+      // Call Google Apps Script Backend API
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        google.script.run
+          .withSuccessHandler(onExpenseSubmitted)
+          .withFailureHandler(onError)
+          .submitExpense(payload);
+      } else {
+        // Local simulation fallback for testing
+        setTimeout(() => {
+          onExpenseSubmitted({
+            success: true,
+            message: '로컬 시뮬레이션: 지출이 등록되었습니다.',
+            summary: {
+              totalAmount: Number(rawAmount),
+              count: 1,
+              budget: 1000000,
+              remaining: 1000000 - Number(rawAmount),
+              usageRate: Math.round((Number(rawAmount) / 1000000) * 100),
+              isOverBudget: false
+            }
+          });
+        }, 1200);
+      }
+    });
+
+    function onExpenseSubmitted(response) {
+      setLoading(false);
+      if (response.success) {
+        showToast('✅ ' + response.message);
+        resetForm();
+        if (response.summary) {
+          updateSummaryUI(response.summary);
+        }
+        loadInitialData();
+      } else {
+        showToast('❌ ' + response.message);
+      }
+    }
+
+    function resetForm() {
+      amountInput.value = '';
+      titleInput.value = '';
+      memoInput.value = '';
+      deletePhotoBtn.click();
+    }
+
+    function setLoading(isLoading) {
+      submitBtn.disabled = isLoading;
+      if (isLoading) {
+        btnText.innerText = selectedImageBase64 ? '영수증 업로드 중...' : '지출 등록 중...';
+        btnSpinner.style.display = 'inline-block';
+      } else {
+        btnText.innerText = '지출 등록하기';
+        btnSpinner.style.display = 'none';
+      }
+    }
+
+    // 7. Data Loading & UI Update
+    function loadInitialData() {
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        google.script.run
+          .withSuccessHandler((data) => {
+            if (data.summary) updateSummaryUI(data.summary);
+            if (data.recentExpenses) renderRecentList(data.recentExpenses);
+          })
+          .withFailureHandler(onError)
+          .getInitialData();
+      }
+    }
+
+    function updateSummaryUI(summary) {
+      const total = summary.totalAmount || 0;
+      const budget = summary.budget || 1000000;
+      const remaining = summary.remaining !== undefined ? summary.remaining : (budget - total);
+      const usageRate = summary.usageRate || 0;
+
+      totalAmountDisplay.innerText = `₩${total.toLocaleString('ko-KR')}`;
+      summaryCount.innerText = `${summary.count || 0}건 기록됨`;
+      budgetDisplay.innerText = `₩${budget.toLocaleString('ko-KR')}`;
+      
+      if (remaining >= 0) {
+        remainingDisplay.innerText = `₩${remaining.toLocaleString('ko-KR')}`;
+      } else {
+        remainingDisplay.innerText = `-₩${Math.abs(remaining).toLocaleString('ko-KR')}`;
+      }
+      usageRateDisplay.innerText = `${usageRate}%`;
+
+      // Progress bar
+      budgetProgressBar.style.width = `${Math.min(usageRate, 100)}%`;
+      if (summary.isOverBudget || usageRate >= 100) {
+        budgetProgressBar.classList.add('over');
+        budgetAlert.style.display = 'flex';
+      } else {
+        budgetProgressBar.classList.remove('over');
+        budgetAlert.style.display = 'none';
+      }
+    }
+
+    function renderRecentList(items) {
+      if (!items || items.length === 0) {
+        recentList.innerHTML = '<div class="empty-state">아직 등록된 지출 내역이 없습니다.</div>';
+        return;
+      }
+
+      recentList.innerHTML = items.map(item => {
+        const catEmoji = getCategoryEmoji(item.category);
+        const hasReceipt = item.receiptUrl && item.receiptUrl.length > 5;
+
+        return `
+          <div class="expense-item">
+            <div class="item-left">
+              <div class="item-icon">${catEmoji}</div>
+              <div class="item-info">
+                <div class="item-title">${escapeHtml(item.title)}</div>
+                <div class="item-meta">${item.date} · ${item.category} · ${item.payMethod}</div>
+              </div>
+            </div>
+            <div class="item-right">
+              <div class="item-amount">-₩${Number(item.amount).toLocaleString('ko-KR')}</div>
+              ${hasReceipt ? `<a href="${item.receiptUrl}" target="_blank" class="receipt-link-badge">📸 영수증</a>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function getCategoryEmoji(cat) {
+      if (!cat) return '💡';
+      if (cat.includes('식비')) return '🍽️';
+      if (cat.includes('교통')) return '🚗';
+      if (cat.includes('쇼핑')) return '🛍️';
+      if (cat.includes('카페') || cat.includes('간식')) return '☕';
+      if (cat.includes('문화')) return '🎬';
+      return '💡';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // 8. Toast Helper
+    function showToast(msg) {
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    function onError(err) {
+      setLoading(false);
+      showToast('❌ 오류: ' + (err.message || err));
+    }
+
+    // 9. Buttons Event Listeners
+    refreshBtn.addEventListener('click', () => {
+      showToast('🔄 최신 데이터를 불러오는 중...');
+      loadInitialData();
+    });
+
+    sendReportBtn.addEventListener('click', () => {
+      if (confirm('현재 계정으로 이번 주 지출 요약 리포트 이메일을 테스트 발송하시겠습니까?')) {
+        showToast('📧 이메일 발송 요청 중...');
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          google.script.run
+            .withSuccessHandler((res) => showToast(res.success ? '📬 ' + res.message : '❌ ' + res.message))
+            .withFailureHandler(onError)
+            .sendWeeklyReport();
+        } else {
+          showToast('📬 테스트 모드: 이메일 발송 완료 시뮬레이션');
+        }
+      }
+    });
+
+    // Initial Load on Page Startup
+    window.addEventListener('DOMContentLoaded', () => {
+      loadInitialData();
+    });
+  </script>
+</body>
+</html>

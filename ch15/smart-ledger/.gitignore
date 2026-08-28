@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Clasp Auth Token (개인 인증 토큰 파일 - 커밋 방지)
+.clasprc.json
