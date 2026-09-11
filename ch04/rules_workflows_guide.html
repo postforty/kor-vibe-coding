@@ -537,7 +537,7 @@
           <thead>
             <tr>
               <th>비교 항목</th>
-              <th>📜 규칙 (Rules / <code>AGENTS.md</code>)</th>
+              <th>📜 규칙 (Rules / <code>rules/</code>)</th>
               <th>🚀 워크플로우 (Workflows)</th>
             </tr>
           </thead>
@@ -559,7 +559,7 @@
             </tr>
             <tr>
               <td><strong>파일 위치</strong></td>
-              <td>프로젝트 루트의 <code>AGENTS.md</code></td>
+              <td><code>.agents/rules/*.md</code> 또는 <code>~/.gemini/config/rules/</code></td>
               <td><code>.agents/workflows/&lt;command&gt;.md</code></td>
             </tr>
             <tr>
@@ -624,10 +624,10 @@
       <!-- Rules Template Code Block -->
       <div class="code-block">
         <div class="code-header">
-          <span>실전 템플릿: AGENTS.md</span>
+          <span>실전 템플릿: .agents/rules/coding_standards.md</span>
           <button class="copy-btn" onclick="copyCode(this, 'ruleTemplate')">템플릿 복사</button>
         </div>
-        <pre><code id="ruleTemplate"># 프로젝트 규칙 (AGENTS.md)
+        <pre><code id="ruleTemplate"># 프로젝트 규칙 (coding_standards.md)
 
 ## 1. 언어 및 커뮤니케이션
 - 모든 답변, 코드 주석, 설명은 반드시 한국어로 작성할 것.
@@ -662,7 +662,7 @@
 
       <!-- Why Workflow? -->
       <div class="alert-box alert-tip">
-        <strong>❓ 왜 커밋 메시지 작성 규칙은 <code>AGENTS.md</code>가 아닌 워크플로우로 만들어야 할까요?</strong><br>
+        <strong>❓ 왜 커밋 메시지 작성 규칙은 상시 규칙(Rules)이 아닌 워크플로우로 만들어야 할까요?</strong><br>
         깃 커밋, 배포, 릴리즈 노트 작성 등은 코딩하는 내내 필요한 것이 아니라 <strong>작업이 끝난 특정 시점</strong>에만 필요합니다. 이를 상시 규칙에 넣어두면 매 턴마다 불필요한 토큰이
         낭비되고 에이전트 집중도가 흐려집니다. 워크플로우로 분리하면 평소 토큰 소비가 <strong>0</strong>이 됩니다!
       </div>
@@ -712,7 +712,7 @@ description: 사용자와의 대화 내역을 바탕으로 변경 사항을 추�
       <div class="choice-grid">
         <div class="choice-card rules">
           <div class="choice-title">
-            <span>📜 Rules (<code>AGENTS.md</code>) 에 넣을 것</span>
+            <span>📜 Rules (<code>.agents/rules/*.md</code>) 에 넣을 것</span>
           </div>
           <ul class="choice-list">
             <li>응답 언어 (한국어 사용 규칙)</li>
@@ -742,7 +742,7 @@ description: 사용자와의 대화 내역을 바탕으로 변경 사항을 추�
         <pre class="mermaid">
 flowchart TD
     Start["새로운 지침이나 규칙을 추가하고 싶다!"] --> Q1{"코딩하는 내내 항상<br/>지켜야 할 원칙인가?"}
-    Q1 -- "YES (상시 준수)" --> Rules["📜 AGENTS.md (Rules)<br/>매 턴마다 상시 적용"]
+    Q1 -- "YES (상시 준수)" --> Rules["📜 Rules (.agents/rules/*.md)<br/>매 턴마다 상시 적용"]
     Q1 -- "NO (특정 순간에만 필요)" --> Q2{"개발 완료 후 커밋, 배포,<br/>리뷰 등 특정 시점에만 실행하는가?"}
     Q2 -- "YES" --> Workflow["🚀 .agents/workflows/*.md<br/>(채팅창에서 /명령어로 온디맨드 호출)"]
       </pre>
