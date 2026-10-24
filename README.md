@@ -54,24 +54,24 @@
 
 ## 🧭 일차별 커리큘럼 한눈에 보기
 
-| 일차 | 핵심 주제 | 주요 실습 및 다루는 도구 | 실습 링크 |
-| :---: | :--- | :--- | :---: |
-| **[1일차](#-1일차-바이브코딩-시작과-안티그래비티-환경-설정)** | 바이브코딩 시작과 환경 설정 | 터미널 조작, 사과게임, 보라부산 사례 분석 | [`ch01/`](./ch01/) |
-| **[2일차](#-2일차-llm의-원리와-마크다운-문서화)** | LLM의 원리와 마크다운 문서화 | 다음 토큰 예측(Next-Token Prediction), 마크다운, Mermaid, draw.io(diagrams.net) | [`ch02/`](./ch02/) |
-| **[3일차](#-3일차-프롬프트-엔지니어링과-웹-기초)** | 프롬프트 엔지니어링과 웹 기초 | reveal.js, make-slide, HTML/CSS/JS 기초 | [`ch03/`](./ch03/) |
-| **[4일차](#-4일차-컨텍스트-관리-rules-git--cloudflare-배포)** | 컨텍스트 관리, Rules, Git & 배포 | uv, .env, 3D 명함 페이지, Cloudflare Pages | [`ch04/`](./ch04/) |
-| **[5일차](#-5일차-실전-외주-워크플로우workflow--mytion-데스크톱-앱)** | 실전 외주 워크플로우(Workflow) & 데스크톱 앱 | Rules 고정, Mytion (Next.js + Tauri 데스크톱 앱) | [`ch05/`](./ch05/) |
-| **[6일차](#-6일차-의심과-실험-그리고-sns--메모-앱-구현)** | 의심과 실험, SNS / 메모 앱 | Outstargram(Next.js), 다크모드, Stitch 메모 앱 | - |
-| **[7일차](#-7일차-프런트엔드-아키텍처와-supabase-baasbackend-as-a-service-연동)** | 프런트엔드 아키텍처와 Supabase 연동 | 토큰 이코노미, Tailwind, shadcn/ui, Supabase Auth | - |
-| **[8일차](#-8일차-페르소나-프롬프팅--vercel-배포)** | 페르소나 프롬프팅 & Vercel 배포 | 사서 vs 개발자 페르소나, 코드 리뷰, Vercel 배포 | - |
-| **[9일차](#-9일차-에이전트와-하네스harness의-개념)** | 에이전트와 하네스(Harness)의 개념 | AGENTS.md, SKILL.md, 서브 에이전트 분리, 프로젝트 킥오프 | [`ch09/`](./ch09/) |
-| **[10일차](#-10일차-툴-콜링tool-calling--jemini-풀스택-개발)** | 툴 콜링(Tool Calling) & Jemini 풀스택 개발 | /grill-me, Jemini(React+FastAPI), FSD, TDD | [`ch10/`](./ch10/) |
-| **[11일차](#-11일차-커스텀-skill-제작--자동화-워크플로우workflow-구축)** | 커스텀 Skill 제작 & 자동화 워크플로우(Workflow) | 날씨/주식 Skill, /commit, /tdd, Todo-List 하네스 | [`ch11/`](./ch11/) |
-| **[12일차](#-12일차-제약-프롬프트-디자인-시스템--render-배포)** | 제약 프롬프트, 디자인 시스템 & Render 배포 | 모델별 제약 프롬프트, DESIGN.md, Render/Supabase 배포 | - |
-| **[13일차](#-13일차-git-체크포인트-세이브포인트--멀티-모델--rag-챗봇)** | Git 체크포인트 (세이브포인트) & 멀티 모델 / RAG | 롤백 전략, LangChain, Ollama/NVIDIA NIM, RAG 챗봇 | [`ch13/`](./ch13/) |
-| **[14일차](#-14일차-구글-로그인oauth-20--토스페이먼츠-결제-mcp--ga4)** | 구글 로그인(OAuth 2.0) & 토스페이먼츠 결제 MCP & GA4 | Google Login, 사용량 모달, Toss 결제 연동, GA4 | [`ch14/`](./ch14/) |
-| **[15일차](#-15일차-오픈-apiopen-api-연동--google-apps-script-업무-자동화)** | 오픈 API(Open API) 연동 & Google Apps Script | 브이월드(Vworld) GIS, 공공 데이터 대시보드, GAS 가계부 자동화 | [`ch15/`](./ch15/) |
-| **[16일차](#-16일차-보안-암호화-고급-확장--포트폴리오-발표)** | 보안 암호화, 고급 확장 & 포트폴리오 | AES-256-GCM 암호화, Plugin/Hook, 포트폴리오 발표 | [`ch16/`](./ch16/) |
+| 일차 | 핵심 주제 | 주요 실습 및 다루는 도구 |
+| :---: | :--- | :--- |
+| **[1일차](#-1일차-바이브코딩-시작과-안티그래비티-환경-설정)** | 바이브코딩 시작과 환경 설정 | 터미널 조작, 사과게임, 보라부산 사례 분석 |
+| **[2일차](#-2일차-llm의-원리와-마크다운-문서화)** | LLM의 원리와 마크다운 문서화 | 다음 토큰 예측(Next-Token Prediction), 마크다운, Mermaid, draw.io(diagrams.net) |
+| **[3일차](#-3일차-프롬프트-엔지니어링과-웹-기초)** | 프롬프트 엔지니어링과 웹 기초 | reveal.js, make-slide, HTML/CSS/JS 기초 |
+| **[4일차](#-4일차-컨텍스트-관리-rules-git--cloudflare-배포)** | 컨텍스트 관리, Rules, Git & 배포 | uv, .env, 3D 명함 페이지, Cloudflare Pages |
+| **[5일차](#-5일차-실전-외주-워크플로우workflow--mytion-데스크톱-앱)** | 실전 외주 워크플로우(Workflow) & 데스크톱 앱 | Rules 고정, Mytion (Next.js + Tauri 데스크톱 앱) |
+| **[6일차](#-6일차-의심과-실험-그리고-sns--메모-앱-구현)** | 의심과 실험, SNS / 메모 앱 | Outstargram(Next.js), 다크모드, Stitch 메모 앱 |
+| **[7일차](#-7일차-프런트엔드-아키텍처와-supabase-baasbackend-as-a-service-연동)** | 프런트엔드 아키텍처와 Supabase 연동 | 토큰 이코노미, Tailwind, shadcn/ui, Supabase Auth |
+| **[8일차](#-8일차-페르소나-프롬프팅--vercel-배포)** | 페르소나 프롬프팅 & Vercel 배포 | 사서 vs 개발자 페르소나, 코드 리뷰, Vercel 배포 |
+| **[9일차](#-9일차-에이전트와-하네스harness의-개념)** | 에이전트와 하네스(Harness)의 개념 | AGENTS.md, SKILL.md, 서브 에이전트 분리, 프로젝트 킥오프 |
+| **[10일차](#-10일차-툴-콜링tool-calling--jemini-풀스택-개발)** | 툴 콜링(Tool Calling) & Jemini 풀스택 개발 | /grill-me, Jemini(React+FastAPI), FSD, TDD |
+| **[11일차](#-11일차-커스텀-skill-제작--자동화-워크플로우workflow-구축)** | 커스텀 Skill 제작 & 자동화 워크플로우(Workflow) | 날씨/주식 Skill, /commit, /tdd, Todo-List 하네스 |
+| **[12일차](#-12일차-제약-프롬프트-디자인-시스템--render-배포)** | 제약 프롬프트, 디자인 시스템 & Render 배포 | 모델별 제약 프롬프트, DESIGN.md, Render/Supabase 배포 |
+| **[13일차](#-13일차-git-체크포인트-세이브포인트--멀티-모델--rag-챗봇)** | Git 체크포인트 (세이브포인트) & 멀티 모델 / RAG | 롤백 전략, LangChain, Ollama/NVIDIA NIM, RAG 챗봇 |
+| **[14일차](#-14일차-구글-로그인oauth-20--토스페이먼츠-결제-mcp--ga4)** | 구글 로그인(OAuth 2.0) & 토스페이먼츠 결제 MCP & GA4 | Google Login, 사용량 모달, Toss 결제 연동, GA4 |
+| **[15일차](#-15일차-오픈-apiopen-api-연동--google-apps-script-업무-자동화)** | 오픈 API(Open API) 연동 & Google Apps Script | 브이월드(Vworld) GIS, 공공 데이터 대시보드, GAS 가계부 자동화 |
+| **[16일차](#-16일차-보안-암호화-고급-확장--포트폴리오-발표)** | 보안 암호화, 고급 확장 & 포트폴리오 | AES-256-GCM 암호화, Plugin/Hook, 포트폴리오 발표 |
 
 ---
 
@@ -82,7 +82,6 @@
 - **바이브코딩 사례 탐색**: [보라부산 (Bora Busan)](https://bora-busan.vercel.app/ko) 실제 서비스 분석
 - **개발 환경 설정**: 터미널 기본 조작 및 에디터 설치
 - **터미널 & 안티그래비티 실습**: 터미널 명령어 익히기 및 [사과게임 (Fruit Box)](https://www.gamesaien.com/game/fruit_box_a/) 실습 진행
-- 📁 실습 디렉토리: [`ch01/`](./ch01/)
 
 ---
 
@@ -92,7 +91,6 @@
 - **영상 학습**: LLM 원리 유튜브 영상 시청 및 확률 기계로서의 AI 특성 학습
 - **마크다운(Markdown) 기초**: 개발 문서 작성을 위한 필수 마크다운 문법
 - **문서화 도구 실습**: 바이브 코딩 역사 문서 작성, `pandoc`, `Mermaid` 다이어그램, `draw.io(diagrams.net)` 활용
-- 📁 실습 디렉토리: [`ch02/`](./ch02/) | 상세 문서: [`ai_and_gemini.md`](./ch02/ai_and_gemini.md)
 
 ---
 
@@ -104,7 +102,6 @@
 - **Node.js 환경 구축**: `nvm` 설치 및 노드 버전 관리
 - **프레젠테이션 제작 실습**: `reveal.js`, `make-slide` Skill, Genspark를 활용한 슬라이드 자동 생성
 - **웹 기본기 다지기**: HTML → CSS → JavaScript 기초 학습 ([PoiemaWeb](https://poiemaweb.com/))
-- 📁 실습 디렉토리: [`ch03/`](./ch03/) (`prompt-engineering/`, `slide/`)
 
 ---
 
@@ -114,7 +111,6 @@
 - **보안 및 환경 변수**: `.env` 파일과 민감 정보 격리
 - **인터랙티브 웹 실습**: 3D 입체 명함 효과를 적용한 자기소개 페이지 제작
 - **버전 관리 및 배포**: Git/GitHub 워크플로우(Workflow) 설정 후 [Cloudflare Pages](https://pages.cloudflare.com/)에 정적 웹 배포
-- 📁 실습 디렉토리: [`ch04/`](./ch04/) (`cover-letter/`, [`ai_security_cheatsheet.html`](./ch04/ai_security_cheatsheet.html), [`rules_workflows_guide.html`](./ch04/rules_workflows_guide.html))
 
 ---
 
@@ -126,7 +122,6 @@
 - **Mytion 프로젝트**:
   - Next.js 기반 노션(Notion) 스타일의 블록형 마크다운 에디터 구현
   - Tauri를 활용하여 경량 윈도우 데스크톱 실행 파일(`.exe`)로 패키징
-- 📁 실습 디렉토리: [`ch05/`](./ch05/) (`mytion/`, `naver-time-macro/`)
 
 ---
 
@@ -168,7 +163,6 @@
   - 내장 서브 에이전트 (`browser`)
   - 안티그래비티 (Non-IDE)에서 역할별 전문 에이전트 분리 (기획자, 시스템 아키텍트, 프런트엔드, 백엔드, 코드 리뷰어)
 - **개인 프로젝트 킥오프**: 나만의 최종 프로젝트 아이디어 기획 및 진행 시작
-- 📁 실습 디렉토리: [`ch09/`](./ch09/) (`subagent-practice/`)
 
 ---
 
@@ -181,7 +175,6 @@
   - 세션별 대화 목록 저장, 조회, 이어 말하기(Multi-turn Session) 지원
 - **설계 원칙 적용**: 백엔드 클린 코드, TDD, 프런트엔드 FSD(Feature-Sliced Design)
 - **안드레이 카파시(Andrej Karpathy) 코딩 가이드라인 스킬 적용**: 체계적인 리팩토링 및 가이드라인 반영
-- 📁 실습 디렉토리: [`ch10/`](./ch10/) | 배포 가이드: [`render_docs_guide.md`](./ch10/render_docs_guide.md)
 
 ---
 
@@ -192,7 +185,6 @@
   - `/tdd`: 테스트 케이스 우선 작성 및 통과 검증 워크플로우(Workflow)
 - **Todo-List 프로젝트 (하네스 종합 적용)**:
   - `AGENTS.md`, `DESIGN.md`, custom skills, Context7 MCP, Supabase MCP 통합 적용
-- 📁 실습 디렉토리: [`ch11/`](./ch11/) (`agent_skills.md`, `subagents.md`, `weather_skill_creation_log.md`)
 
 ---
 
@@ -213,7 +205,6 @@
 - **LangChain 연동 (Context7 MCP)**: 다양한 AI 공급자(Multi-vendor) 교체 인터페이스 구성
 - **로컬 & 엔터프라이즈 모델**: Ollama 및 [NVIDIA NIM](https://build.nvidia.com/) 클라우드 모델 호출
 - **Supabase 인증 연동 및 RAG 챗봇**: 지식 베이스 기반 검색 증강 생성(RAG) 파이프라인 구축
-- 📁 실습 디렉토리: [`ch13/`](./ch13/) (`github-savepoint/`, `subagent-issue/`)
 
 ---
 
@@ -224,7 +215,6 @@
 - **전자결제 연동**:
   - [토스페이먼츠(Toss Payments) LLM 가이드](https://docs.tosspayments.com/guides/v2/get-started/llms-guide#mcp-%EC%84%9C%EB%B2%84-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0) 기반 결제 MCP 연동
 - **사용자 행동 분석**: Google Analytics 4 (GA4) 트래킹 태그 삽입
-- 📁 실습 디렉토리: [`ch14/`](./ch14/) (`toss/`)
 
 ---
 
@@ -234,7 +224,6 @@
 - **Google Workspace 자동화**:
   - Google Apps Script(GAS) & clasp 연동
   - 구글 스프레드시트 스마트 가계부 및 지출 분석 대시보드 구축
-- 📁 실습 디렉토리: [`ch15/`](./ch15/) (`gas_vibe_practice_guide.md`, `google_apps_script.md`, `smart_receipt_ledger_plan.md`, `smart-ledger/`)
 
 ---
 
@@ -244,7 +233,6 @@
 - **엔드투엔드 데이터 보안 암호화**:
   - DB 확장 의존성을 줄이고, FastAPI 백엔드에서 `AES-256-GCM`으로 `messages.content`를 암호화하여 Supabase에 안전하게 적재
 - **수료식 및 최종 프로젝트 발표**: 문제 해결 경험 공유, 코드 리뷰 및 향후 커리어 로드맵 설정
-- 📁 실습 디렉토리: [`ch16/`](./ch16/) (`nvidia-model/`)
 
 ---
 
