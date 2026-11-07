@@ -28,7 +28,7 @@
     - [📅 \[3일차\] 프롬프트 엔지니어링과 웹 기초](#-3일차-프롬프트-엔지니어링과-웹-기초)
     - [📅 \[4일차\] 컨텍스트 관리, Rules, Git \& Cloudflare 배포](#-4일차-컨텍스트-관리-rules-git--cloudflare-배포)
     - [📅 \[5일차\] 외주 프로젝트 재현 실습 (네이버 시계 매크로)](#-5일차-외주-프로젝트-재현-실습-네이버-시계-매크로)
-    - [📅 \[6일차\] 의심과 실험, 그리고 Mytion 데스크톱 앱 구현](#-6일차-의심과-실험-그리고-mytion-데스크톱-앱-구현)
+    - [📅 \[6일차\] Mytion 데스크톱 앱 구현](#-6일차-mytion-데스크톱-앱-구현)
     - [📅 \[7일차\] 프런트엔드 아키텍처와 Supabase BaaS(Backend-as-a-Service) 연동](#-7일차-프런트엔드-아키텍처와-supabase-baasbackend-as-a-service-연동)
     - [📅 \[8일차\] 페르소나 프롬프팅 \& Vercel 배포](#-8일차-페르소나-프롬프팅--vercel-배포)
     - [📅 \[9일차\] 에이전트와 하네스(Harness)의 개념](#-9일차-에이전트와-하네스harness의-개념)
@@ -66,9 +66,9 @@
 | [3](#-3일차-프롬프트-엔지니어링과-웹-기초) | 프롬프트 엔지니어링과 웹 기초 | reveal.js, make-slide, HTML/CSS/JS 기초 |
 | [4](#-4일차-컨텍스트-관리-rules-git--cloudflare-배포) | 컨텍스트 관리, Rules, Git & 배포 | uv, .env, 3D 명함 페이지, Cloudflare Pages |
 | [5](#-5일차-외주-프로젝트-재현-실습-네이버-시계-매크로) | 외주 프로젝트 재현 실습 (네이버 시계 매크로) | Rules 고정, Python 네이버 서버 시간 매크로 프로그램 |
-| [6](#-6일차-의심과-실험-그리고-mytion-데스크톱-앱-구현) | 의심과 실험, Mytion 데스크톱 앱 | Mytion (Next.js + Tauri 블록 메모 앱) |
-| [7](#-7일차-프런트엔드-아키텍처와-supabase-baasbackend-as-a-service-연동) | 프런트엔드 아키텍처와 Supabase 연동 | 토큰 이코노미, Tailwind, shadcn/ui, Supabase Auth |
-| [8](#-8일차-페르소나-프롬프팅--vercel-배포) | 페르소나 프롬프팅 & Vercel 배포 | 사서 vs 개발자 페르소나, 코드 리뷰, Vercel 배포 |
+| [6](#-6일차-mytion-데스크톱-앱-구현) | Mytion 데스크톱 앱 구현 | Mytion (Next.js + Tauri 블록 메모 앱) |
+| [7](#-7일차-프런트엔드-아키텍처와-supabase-baasbackend-as-a-service-연동) | 프런트엔드 아키텍처와 Supabase 연동 | 토큰 이코노미, Vibe Coffee 1단계(Next.js, Tailwind, Supabase DB/Auth) |
+| [8](#-8일차-페르소나-프롬프팅--vercel-배포) | 페르소나 프롬프팅 & Vercel 배포 | 사서 vs 개발자 페르소나, Vibe Coffee 2단계(실시간 주문/KDS) 및 Vercel 배포 |
 | [9](#-9일차-에이전트와-하네스harness의-개념) | 에이전트와 하네스(Harness)의 개념 | AGENTS.md, SKILL.md, 서브 에이전트 분리, 프로젝트 킥오프 |
 | [10](#-10일차-툴-콜링tool-calling--jemini-풀스택-개발) | 툴 콜링(Tool Calling) & Jemini 풀스택 개발 | /grill-me, Jemini(React+FastAPI), FSD, TDD |
 | [11](#-11일차-커스텀-skill-제작--자동화-워크플로우workflow-구축) | 커스텀 Skill 제작 & 자동화 워크플로우(Workflow) | 날씨/주식 Skill, /commit, /tdd, Todo-List 하네스 |
@@ -129,8 +129,7 @@
 
 ---
 
-### 📅 [6일차] 의심과 실험, 그리고 Mytion 데스크톱 앱 구현
-- **의심하고 실험하라**: 에디터 코드 영역 vs 터미널 영역에서의 `Ctrl+L` 단축키 동작 차이 분석 (`cls` 클리어 적극 권장)
+### 📅 [6일차] Mytion 데스크톱 앱 구현
 - **Mytion 프로젝트 만들기 (`D:\wsh\vibe-coding\ch06\mytion`)**:
   - Next.js 15 & BlockNote 기반 노션(Notion) 스타일의 블록형 마크다운 에디터 구현
   - 로컬 SQLite 연동 및 400ms 디바운스 실시간 자동 저장(Autosave)
@@ -142,10 +141,10 @@
 - **프런트엔드 생태계 이해**: 라이브러리 vs 프레임워크 비교 ([PoiemaWeb](https://poiemaweb.com/))
 - **도서 소개**: 『커서로 시작하는 AI코딩 입문』
 - **토큰 이코노미 실전**: 최신 모델(Gemini Flash)로 기획/구현 계획 초안 작성 → 고급 모델(Gemini Pro)로 검증 및 고도화
-- **Coffee-Order-App 프로젝트 (1단계)**:
-  - Tailwind CSS를 활용한 반응형 스타일링
-  - Context7 MCP와 shadcn/ui 컴포넌트 라이브러리 결합
-  - Supabase MCP 연결, 회원가입 및 데이터베이스 테이블 설계
+- **Vibe Coffee 주문 앱 제작 (1단계 - `D:\wsh-repo\old\vibe-coding\ch07\vibe-coffee-order`)**:
+  - Next.js 16 (App Router) 기반 모바일 사전 주문(사이렌오더) UI 및 관리자(KDS) 레이아웃 설계
+  - Tailwind CSS 및 테마 디자인 토큰을 활용한 반응형 스타일링
+  - Supabase MCP 연결, 데이터베이스 테이블 및 스키마 설계 (`database.types.ts` 생성)
   - Supabase Auth를 활용한 Admin 로그인 기능 (`Authentication` > `Users`)
 
 ---
@@ -154,8 +153,9 @@
 - **페르소나 프롬프팅의 힘**:  
   - *"라이브러리에 대해 어떻게 생각해?"* vs *"사서 관점에서"* vs *"소프트웨어 아키텍트 관점에서"*
 - **체계적 코드 리뷰**: *"시니어 코드 리뷰어로서 단계별로 면밀히 분석해서 개선점을 보고해줘"* 프롬프트 패턴
-- **Coffee-Order-App 프로젝트 (2단계)**:
-  - [Vercel](https://vercel.com/) 가입 및 원클릭 CI/CD 배포 파이프라인 완성
+- **Vibe Coffee 주문 앱 완성 및 배포 (2단계 - `D:\wsh-repo\old\vibe-coding\ch07\vibe-coffee-order`)**:
+  - Supabase Realtime 기반 실시간 주문 접수/상태 변경 및 KDS 알림음(Web Audio API) 연동
+  - [Vercel](https://vercel.com/) 가입 및 Supabase 환경 변수 연동을 통한 원클릭 CI/CD 웹 배포 완료
 
 ---
 
