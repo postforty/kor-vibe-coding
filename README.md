@@ -1,4 +1,4 @@
-# 🚀 AI 바이브코딩 (Vibe Coding) 실무 가이드
+# 🚀 바이브코딩 (Vibe Coding)
 
 > **"코더에서 설계자로, AI 에이전트를 지휘하는 에이전틱 엔지니어링의 시작"**  
 > 본 저장소는 Google Antigravity, Gemini API 모델, 다양한 AI 모델 및 최신 개발 도구를 활용하여 기획부터 배포·포트폴리오 완성까지 실습하는 **AI 바이브코딩 실무 과정**의 강의 노트 및 실습 코드 저장소입니다.
@@ -17,27 +17,29 @@
 
 ## 📌 목차 (Table of Contents)
 
-- [과정 개요 및 핵심 원칙](#-과정-개요-및-핵심-원칙)
-- [일차별 커리큘럼 한눈에 보기](#-일차별-커리큘럼-한눈에-보기)
-- [일차별 상세 커리큘럼 로드맵](#-일차별-상세-커리큘럼-로드맵)
-  - [[1일차] 바이브코딩 시작과 안티그래비티 환경 설정](#-1일차-바이브코딩-시작과-안티그래비티-환경-설정)
-  - [[2일차] LLM의 원리와 마크다운 문서화](#-2일차-llm의-원리와-마크다운-문서화)
-  - [[3일차] 프롬프트 엔지니어링과 웹 기초](#-3일차-프롬프트-엔지니어링과-웹-기초)
-  - [[4일차] 컨텍스트 관리, Rules, Git & Cloudflare 배포](#-4일차-컨텍스트-관리-rules-git--cloudflare-배포)
-  - [[5일차] 실전 외주 워크플로우(Workflow) & Mytion 데스크톱 앱](#-5일차-실전-외주-워크플로우workflow--mytion-데스크톱-앱)
-  - [[6일차] 의심과 실험, 그리고 SNS / 메모 앱 구현](#-6일차-의심과-실험-그리고-sns--메모-앱-구현)
-  - [[7일차] 프런트엔드 아키텍처와 Supabase BaaS(Backend-as-a-Service) 연동](#-7일차-프런트엔드-아키텍처와-supabase-baasbackend-as-a-service-연동)
-  - [[8일차] 페르소나 프롬프팅 & Vercel 배포](#-8일차-페르소나-프롬프팅--vercel-배포)
-  - [[9일차] 에이전트와 하네스(Harness)의 개념](#-9일차-에이전트와-하네스harness의-개념)
-  - [[10일차] 툴 콜링(Tool Calling) & Jemini 풀스택 개발](#-10일차-툴-콜링tool-calling--jemini-풀스택-개발)
-  - [[11일차] 커스텀 Skill 제작 & 자동화 워크플로우(Workflow) 구축](#-11일차-커스텀-skill-제작--자동화-워크플로우workflow-구축)
-  - [[12일차] 제약 프롬프트, 디자인 시스템 & Render 배포](#-12일차-제약-프롬프트-디자인-시스템--render-배포)
-  - [[13일차] Git 체크포인트 (세이브포인트) & 멀티 모델 / RAG 챗봇](#-13일차-git-체크포인트-세이브포인트--멀티-모델--rag-챗봇)
-  - [[14일차] 구글 로그인(OAuth 2.0) & 토스페이먼츠 결제 MCP & GA4](#-14일차-구글-로그인oauth-20--토스페이먼츠-결제-mcp--ga4)
-  - [[15일차] 오픈 API(Open API) 연동 & Google Apps Script 업무 자동화](#-15일차-오픈-apiopen-api-연동--google-apps-script-업무-자동화)
-  - [[16일차] 보안 암호화, 고급 확장 & 포트폴리오 발표](#-16일차-보안-암호화-고급-확장--포트폴리오-발표)
-- [도서 및 주요 참고 링크](#-도서-및-주요-참고-링크)
-- [상세 커리큘럼 문서](#-상세-커리큘럼-문서)
+- [🚀 바이브코딩 (Vibe Coding)](#-바이브코딩-vibe-coding)
+  - [📌 목차 (Table of Contents)](#-목차-table-of-contents)
+  - [💡 과정 개요 및 핵심 원칙](#-과정-개요-및-핵심-원칙)
+    - [1.1 교육 목표](#11-교육-목표)
+  - [🧭 일차별 커리큘럼 한눈에 보기](#-일차별-커리큘럼-한눈에-보기)
+  - [🗓️ 일차별 상세 커리큘럼 로드맵](#️-일차별-상세-커리큘럼-로드맵)
+    - [📅 \[1일차\] 바이브코딩 시작과 안티그래비티 환경 설정](#-1일차-바이브코딩-시작과-안티그래비티-환경-설정)
+    - [📅 \[2일차\] LLM의 원리와 마크다운 문서화](#-2일차-llm의-원리와-마크다운-문서화)
+    - [📅 \[3일차\] 프롬프트 엔지니어링과 웹 기초](#-3일차-프롬프트-엔지니어링과-웹-기초)
+    - [📅 \[4일차\] 컨텍스트 관리, Rules, Git \& Cloudflare 배포](#-4일차-컨텍스트-관리-rules-git--cloudflare-배포)
+    - [📅 \[5일차\] 실전 외주 워크플로우(Workflow) \& Mytion 데스크톱 앱](#-5일차-실전-외주-워크플로우workflow--mytion-데스크톱-앱)
+    - [📅 \[6일차\] 의심과 실험, 그리고 SNS / 메모 앱 구현](#-6일차-의심과-실험-그리고-sns--메모-앱-구현)
+    - [📅 \[7일차\] 프런트엔드 아키텍처와 Supabase BaaS(Backend-as-a-Service) 연동](#-7일차-프런트엔드-아키텍처와-supabase-baasbackend-as-a-service-연동)
+    - [📅 \[8일차\] 페르소나 프롬프팅 \& Vercel 배포](#-8일차-페르소나-프롬프팅--vercel-배포)
+    - [📅 \[9일차\] 에이전트와 하네스(Harness)의 개념](#-9일차-에이전트와-하네스harness의-개념)
+    - [📅 \[10일차\] 툴 콜링(Tool Calling) \& Jemini 풀스택 개발](#-10일차-툴-콜링tool-calling--jemini-풀스택-개발)
+    - [📅 \[11일차\] 커스텀 Skill 제작 \& 자동화 워크플로우(Workflow) 구축](#-11일차-커스텀-skill-제작--자동화-워크플로우workflow-구축)
+    - [📅 \[12일차\] 제약 프롬프트, 디자인 시스템 \& Render 배포](#-12일차-제약-프롬프트-디자인-시스템--render-배포)
+    - [📅 \[13일차\] Git 체크포인트 (세이브포인트) \& 멀티 모델 / RAG 챗봇](#-13일차-git-체크포인트-세이브포인트--멀티-모델--rag-챗봇)
+    - [📅 \[14일차\] 구글 로그인(OAuth 2.0) \& 토스페이먼츠 결제 MCP \& GA4](#-14일차-구글-로그인oauth-20--토스페이먼츠-결제-mcp--ga4)
+    - [📅 \[15일차\] 오픈 API(Open API) 연동 \& Google Apps Script 업무 자동화](#-15일차-오픈-apiopen-api-연동--google-apps-script-업무-자동화)
+    - [📅 \[16일차\] 보안 암호화, 고급 확장 \& 포트폴리오 발표](#-16일차-보안-암호화-고급-확장--포트폴리오-발표)
+  - [📚 도서 및 주요 참고 링크](#-도서-및-주요-참고-링크)
 
 ---
 
@@ -57,24 +59,24 @@
 
 ## 🧭 일차별 커리큘럼 한눈에 보기
 
-| 일차 | 핵심 주제 | 주요 실습 및 다루는 도구 |
-| :---: | :--- | :--- |
-| **[1일차](#-1일차-바이브코딩-시작과-안티그래비티-환경-설정)** | 바이브코딩 시작과 환경 설정 | 터미널 조작, 테트리스 게임 |
-| **[2일차](#-2일차-llm의-원리와-마크다운-문서화)** | LLM의 원리와 마크다운 문서화 | 다음 토큰 예측(Next-Token Prediction), 마크다운, Mermaid, draw.io(diagrams.net) |
-| **[3일차](#-3일차-프롬프트-엔지니어링과-웹-기초)** | 프롬프트 엔지니어링과 웹 기초 | reveal.js, make-slide, HTML/CSS/JS 기초 |
-| **[4일차](#-4일차-컨텍스트-관리-rules-git--cloudflare-배포)** | 컨텍스트 관리, Rules, Git & 배포 | uv, .env, 3D 명함 페이지, Cloudflare Pages |
-| **[5일차](#-5일차-실전-외주-워크플로우workflow--mytion-데스크톱-앱)** | 실전 외주 워크플로우(Workflow) & 데스크톱 앱 | Rules 고정, Mytion (Next.js + Tauri 데스크톱 앱) |
-| **[6일차](#-6일차-의심과-실험-그리고-sns--메모-앱-구현)** | 의심과 실험, SNS / 메모 앱 | Outstargram(Next.js), 다크모드, Stitch 메모 앱 |
-| **[7일차](#-7일차-프런트엔드-아키텍처와-supabase-baasbackend-as-a-service-연동)** | 프런트엔드 아키텍처와 Supabase 연동 | 토큰 이코노미, Tailwind, shadcn/ui, Supabase Auth |
-| **[8일차](#-8일차-페르소나-프롬프팅--vercel-배포)** | 페르소나 프롬프팅 & Vercel 배포 | 사서 vs 개발자 페르소나, 코드 리뷰, Vercel 배포 |
-| **[9일차](#-9일차-에이전트와-하네스harness의-개념)** | 에이전트와 하네스(Harness)의 개념 | AGENTS.md, SKILL.md, 서브 에이전트 분리, 프로젝트 킥오프 |
-| **[10일차](#-10일차-툴-콜링tool-calling--jemini-풀스택-개발)** | 툴 콜링(Tool Calling) & Jemini 풀스택 개발 | /grill-me, Jemini(React+FastAPI), FSD, TDD |
-| **[11일차](#-11일차-커스텀-skill-제작--자동화-워크플로우workflow-구축)** | 커스텀 Skill 제작 & 자동화 워크플로우(Workflow) | 날씨/주식 Skill, /commit, /tdd, Todo-List 하네스 |
-| **[12일차](#-12일차-제약-프롬프트-디자인-시스템--render-배포)** | 제약 프롬프트, 디자인 시스템 & Render 배포 | 모델별 제약 프롬프트, DESIGN.md, Render/Supabase 배포 |
-| **[13일차](#-13일차-git-체크포인트-세이브포인트--멀티-모델--rag-챗봇)** | Git 체크포인트 (세이브포인트) & 멀티 모델 / RAG | 롤백 전략, LangChain, Ollama/NVIDIA NIM, RAG 챗봇 |
-| **[14일차](#-14일차-구글-로그인oauth-20--토스페이먼츠-결제-mcp--ga4)** | 구글 로그인(OAuth 2.0) & 토스페이먼츠 결제 MCP & GA4 | Google Login, 사용량 모달, Toss 결제 연동, GA4 |
-| **[15일차](#-15일차-오픈-apiopen-api-연동--google-apps-script-업무-자동화)** | 오픈 API(Open API) 연동 & Google Apps Script | 브이월드(Vworld) GIS, 공공 데이터 대시보드, GAS 가계부 자동화 |
-| **[16일차](#-16일차-보안-암호화-고급-확장--포트폴리오-발표)** | 보안 암호화, 고급 확장 & 포트폴리오 | AES-256-GCM 암호화, Plugin/Hook, 포트폴리오 발표 |
+|                                       일차                                        | 핵심 주제                                            | 주요 실습 및 다루는 도구                                                        |
+| :-------------------------------------------------------------------------------: | :--------------------------------------------------- | :------------------------------------------------------------------------------ |
+|           **[1일차](#-1일차-바이브코딩-시작과-안티그래비티-환경-설정)**           | 바이브코딩 시작과 환경 설정                          | 터미널 조작, 테트리스 게임                                                      |
+|                 **[2일차](#-2일차-llm의-원리와-마크다운-문서화)**                 | LLM의 원리와 마크다운 문서화                         | 다음 토큰 예측(Next-Token Prediction), 마크다운, Mermaid, draw.io(diagrams.net) |
+|                **[3일차](#-3일차-프롬프트-엔지니어링과-웹-기초)**                 | 프롬프트 엔지니어링과 웹 기초                        | reveal.js, make-slide, HTML/CSS/JS 기초                                         |
+|           **[4일차](#-4일차-컨텍스트-관리-rules-git--cloudflare-배포)**           | 컨텍스트 관리, Rules, Git & 배포                     | uv, .env, 3D 명함 페이지, Cloudflare Pages                                      |
+|       **[5일차](#-5일차-실전-외주-워크플로우workflow--mytion-데스크톱-앱)**       | 실전 외주 워크플로우(Workflow) & 데스크톱 앱         | Rules 고정, Mytion (Next.js + Tauri 데스크톱 앱)                                |
+|             **[6일차](#-6일차-의심과-실험-그리고-sns--메모-앱-구현)**             | 의심과 실험, SNS / 메모 앱                           | Outstargram(Next.js), 다크모드, Stitch 메모 앱                                  |
+| **[7일차](#-7일차-프런트엔드-아키텍처와-supabase-baasbackend-as-a-service-연동)** | 프런트엔드 아키텍처와 Supabase 연동                  | 토큰 이코노미, Tailwind, shadcn/ui, Supabase Auth                               |
+|                **[8일차](#-8일차-페르소나-프롬프팅--vercel-배포)**                | 페르소나 프롬프팅 & Vercel 배포                      | 사서 vs 개발자 페르소나, 코드 리뷰, Vercel 배포                                 |
+|               **[9일차](#-9일차-에이전트와-하네스harness의-개념)**                | 에이전트와 하네스(Harness)의 개념                    | AGENTS.md, SKILL.md, 서브 에이전트 분리, 프로젝트 킥오프                        |
+|          **[10일차](#-10일차-툴-콜링tool-calling--jemini-풀스택-개발)**           | 툴 콜링(Tool Calling) & Jemini 풀스택 개발           | /grill-me, Jemini(React+FastAPI), FSD, TDD                                      |
+|     **[11일차](#-11일차-커스텀-skill-제작--자동화-워크플로우workflow-구축)**      | 커스텀 Skill 제작 & 자동화 워크플로우(Workflow)      | 날씨/주식 Skill, /commit, /tdd, Todo-List 하네스                                |
+|          **[12일차](#-12일차-제약-프롬프트-디자인-시스템--render-배포)**          | 제약 프롬프트, 디자인 시스템 & Render 배포           | 모델별 제약 프롬프트, DESIGN.md, Render/Supabase 배포                           |
+|      **[13일차](#-13일차-git-체크포인트-세이브포인트--멀티-모델--rag-챗봇)**      | Git 체크포인트 (세이브포인트) & 멀티 모델 / RAG      | 롤백 전략, LangChain, Ollama/NVIDIA NIM, RAG 챗봇                               |
+|      **[14일차](#-14일차-구글-로그인oauth-20--토스페이먼츠-결제-mcp--ga4)**       | 구글 로그인(OAuth 2.0) & 토스페이먼츠 결제 MCP & GA4 | Google Login, 사용량 모달, Toss 결제 연동, GA4                                  |
+|   **[15일차](#-15일차-오픈-apiopen-api-연동--google-apps-script-업무-자동화)**    | 오픈 API(Open API) 연동 & Google Apps Script         | 브이월드(Vworld) GIS, 공공 데이터 대시보드, GAS 가계부 자동화                   |
+|           **[16일차](#-16일차-보안-암호화-고급-확장--포트폴리오-발표)**           | 보안 암호화, 고급 확장 & 포트폴리오                  | AES-256-GCM 암호화, Plugin/Hook, 포트폴리오 발표                                |
 
 ---
 
@@ -240,21 +242,13 @@
 
 ## 📚 도서 및 주요 참고 링크
 
-| 분류 | 링크 / 출처 | 설명 |
-| :--- | :--- | :--- |
-| **교재** | [요즘 바이브 코딩 안티그래비티 완벽 가이드](https://goldenrabbit.co.kr/) | 골든래빗, 2026 (최지호 저) |
-| **참고 도서** | [요즘 바이브 코딩 커서 X 클로드 코드 실전 외주 돈 벌기](https://goldenrabbit.co.kr/books/9791124516010) | 골든래빗 실전 외주 바이블 |
-| **배포 가이드** | [웹 서비스 배포 방법 총정리 (요즘IT)](https://yozm.wishket.com/magazine/detail/3662/) | 클라우드 플랫폼별 배포 비교 |
-| **개발 프로세스** | [소프트웨어 개발 5단계 프로세스](https://codedragon.tistory.com/9099) | 기획-설계-구현-테스트-배포 원칙 |
-| **클라우드 배포** | [Render 공식 사이트](https://render.com/) | 백엔드(FastAPI) 및 웹 서비스 배포 |
-| **브라우저 자동화** | [브라우저 제어와 자동화 가이드 (위키독스)](https://wikidocs.net/331007?utm_source=perplexity) | 웹 브라우저 에이전트 제어 |
-| **결제 시스템** | [토스페이먼츠 MCP 서버 활용 가이드 (Toss Tech)](https://toss.tech/article/tosspayments-mcp) | LLM 결제 MCP 연동 공식 아티클 |
-| **전자책 뷰어** | [YES24 eBook PC 뷰어 안내](https://www.yes24.com/notice/ebookguide/guide_pc.aspx) | 전자교재 열람 가이드 |
-
----
-
-## 📑 상세 커리큘럼 문서
-
-회차별/교시별 상세 수업 계획, 시간표, 루브릭 및 학습 목표는 아래 문서에서 확인하실 수 있습니다.
-
-👉 **[상세 교육과정 커리큘럼 전문 보기 (`detail_curriculum.md`)](./curriculum/detail_curriculum.md)**
+| 분류                | 링크 / 출처                                                                                             | 설명                              |
+| :------------------ | :------------------------------------------------------------------------------------------------------ | :-------------------------------- |
+| **교재**            | [요즘 바이브 코딩 안티그래비티 완벽 가이드](https://goldenrabbit.co.kr/)                                | 골든래빗, 2026 (최지호 저)        |
+| **참고 도서**       | [요즘 바이브 코딩 커서 X 클로드 코드 실전 외주 돈 벌기](https://goldenrabbit.co.kr/books/9791124516010) | 골든래빗 실전 외주 바이블         |
+| **배포 가이드**     | [웹 서비스 배포 방법 총정리 (요즘IT)](https://yozm.wishket.com/magazine/detail/3662/)                   | 클라우드 플랫폼별 배포 비교       |
+| **개발 프로세스**   | [소프트웨어 개발 5단계 프로세스](https://codedragon.tistory.com/9099)                                   | 기획-설계-구현-테스트-배포 원칙   |
+| **클라우드 배포**   | [Render 공식 사이트](https://render.com/)                                                               | 백엔드(FastAPI) 및 웹 서비스 배포 |
+| **브라우저 자동화** | [브라우저 제어와 자동화 가이드 (위키독스)](https://wikidocs.net/331007?utm_source=perplexity)           | 웹 브라우저 에이전트 제어         |
+| **결제 시스템**     | [토스페이먼츠 MCP 서버 활용 가이드 (Toss Tech)](https://toss.tech/article/tosspayments-mcp)             | LLM 결제 MCP 연동 공식 아티클     |
+| **전자책 뷰어**     | [YES24 eBook PC 뷰어 안내](https://www.yes24.com/notice/ebookguide/guide_pc.aspx)                       | 전자교재 열람 가이드              |
